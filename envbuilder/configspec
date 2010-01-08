@@ -1,0 +1,6 @@
+[project]
+repos = force_list()
+
+[__many__]
+vc = string()
+url = string()

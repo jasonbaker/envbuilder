@@ -5,4 +5,10 @@ setup(
     version='0.1.0',
     packages=find_packages(),
     setup_requires=['nose'],
+    install_requires=['ConfigObj', 'argparse'],
+    entry_points = {
+        'console_scripts' : [
+            'envbuilder = envbuilder.run:main'
+            ]
+        }
     )

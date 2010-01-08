@@ -1,0 +1,2 @@
+class Checkout(object):
+    pass
