@@ -1,6 +1,7 @@
 [project]
 repos = force_list()
-
-[__many__]
-vc = string()
-url = string()
+___many___ = string()
+       [[__many__]]
+       vcs = string()
+       url = string()
+       build = string(default='%(python)s setup.py install')
