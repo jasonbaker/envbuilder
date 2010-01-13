@@ -13,14 +13,15 @@ class Config(object):
     def __init__(self, filepath=None, config=None, name=None):
         assert (filepath or config), "Either filepath or config must be specified!"
         if not config:
-            self._config = ConfigObj(filepath, unrepr=True, interpolation='Template',
-                                 configspec=configspec)
+            self._config = ConfigObj(filepath, unrepr=True,
+                                     interpolation='Template',
+                                     configspec=configspec)
+            self.name = name
+            self._val = Validator()
+            self._config.validate(self._val)
         else:
             self._config = config
-        self.name = name
-        # self._val = Validator()
-        # success = self._config.validate(self._val)
-        # assert success
+
 
     def __getattr__(self, name):
         return ConfigSection(self._config[name])

@@ -4,4 +4,5 @@ ___many___ = string()
        [[__many__]]
        vcs = string()
        url = string()
-       build = string(default='%(python)s setup.py install')
+       build = string(default='$python setup.py develop')
+       svn_checkout = string(default='svn co $url $name')
