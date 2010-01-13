@@ -6,3 +6,6 @@
 dist
 env
 build
+lib
+bin
+include
