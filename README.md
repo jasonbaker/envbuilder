@@ -32,20 +32,20 @@ The following will make a virtualenv with envbuilder installed.  There's
 probably not any good reason to do this other than to provide an easy
 example for the README.
 
-[project]
-parcels = 'envbuilder', # Note the comma
-
-	[[DEFAULT]]
-	git_checkout = 'git clone $url'
-	cwd = '/home/jason/src/envbuilder-src'
-	python = '$cwd/bin/python'
-		
-	[[envbuilder]]
-	name = 'envbuilder'
-	url = 'git://github.com/jasonbaker/envbuilder.git'
-	setup = '$python setup.py develop'
-	checkout = '$git_checkout'
-
+    [project]
+    parcels = 'envbuilder', # Note the comma
+    
+    	[[DEFAULT]]
+    	git_checkout = 'git clone $url'
+    	cwd = '/home/jason/src/envbuilder-src'
+    	python = '$cwd/bin/python'
+    		
+    	[[envbuilder]]
+    	name = 'envbuilder'
+    	url = 'git://github.com/jasonbaker/envbuilder.git'
+    	setup = '$python setup.py develop'
+    	checkout = '$git_checkout'
+    
 ### The sections
 
 * *project* - This section is the top-level section.  The only option it 
