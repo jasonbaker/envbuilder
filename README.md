@@ -110,3 +110,8 @@ be used with other languages, but this has not yet been tried.  Any saps
 (aka "open source developers") willing to test this out are encouraged
 to do so!
     
+TODO
+-------------
+
+* Allow creation of custom commands.
+* Add a help command.
