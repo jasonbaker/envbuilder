@@ -106,7 +106,7 @@ that has a command-line interface.
 **Does envbuilder have to be used for Python?**
 
 Envbuilder was designed to be flexible enough that it could *theoretically*
-be used with other languages, but this has not yet been tried.  Any willing
-saps (aka "open source developers") willing to test this out are encouraged
+be used with other languages, but this has not yet been tried.  Any saps 
+(aka "open source developers") willing to test this out are encouraged
 to do so!
     
