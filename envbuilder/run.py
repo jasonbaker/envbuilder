@@ -14,7 +14,6 @@ def main():
     cwd = os.path.abspath(os.path.curdir)
     filepath = os.path.join(cwd, '.env')
     config = Config(filepath)
-    sections = config.project.repos
     cmd_args = get_args()
     command = commands[cmd_args.command]()
     command.run(args=cmd_args, config=config)

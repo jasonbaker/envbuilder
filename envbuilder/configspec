@@ -1,5 +1,5 @@
 [project]
-repos = force_list()
+parcels = force_list()
 ___many___ = string()
        [[__many__]]
        vcs = string()
