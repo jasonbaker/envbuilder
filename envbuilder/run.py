@@ -3,11 +3,13 @@ import os.path
 from envbuilder.config import Config
 from envbuilder.checkout import Checkout
 from envbuilder.setup import Setup
+from envbuilder.test import Test
 from envbuilder.args import get_args
 
 commands = { 'checkout' : Checkout,
              'co' : Checkout,
              'setup' : Setup,
+             'test' : Test,
              }
 
 def main():

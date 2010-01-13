@@ -4,6 +4,8 @@ from os.path import dirname, abspath, join
 from configobj import ConfigObj
 from validate import Validator
 
+from envbuilder.sh import sh
+
 this_directory = abspath(dirname(__file__))
 configspec = join(this_directory, 'configspec')
 
@@ -34,6 +36,23 @@ class Config(object):
 
     def _raw(self):
         return self._config
+
+    def run_command(self, cmd, cwd=None):
+        """
+        Run a command on all parcels.  The argument cmd specifies the
+        config option name of the command, and cwd is the working
+        directory to run the command from within.  If cwd is not
+        specified or None, it will be the name of the parcel.
+        """
+        for parcel in self.parcels:
+            run_steps = parcel[cmd]
+            if not isinstance(run_steps, (tuple, list)):
+                run_steps = [run_steps]
+            for step in run_steps:
+                if cwd is None:
+                    sh(step, join('.', parcel['name']))
+                else:
+                    sh(step, cwd)
 
     @property
     def parcels(self):
