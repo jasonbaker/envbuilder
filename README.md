@@ -57,7 +57,7 @@ not very meaningful.  However, when using multiple parcels, it is useful to
 define default values to be used in each section.
 
 * *envbuilder* - Here's where we actually define a parcel.  There are 
-currently only two options that need to be defined: build and checkout.    
+currently only two options that need to be defined: setup and checkout.    
 
 You'll notice that in both of these options, we use something called
 *string interpolation*.  Every part that begins with a $ is defined
