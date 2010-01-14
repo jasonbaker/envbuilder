@@ -13,5 +13,7 @@ class Setup(object):
                 sh(build_cmd, cwd=os.path.abspath(parcel['name']))
 
     def add_args(self, subparsers):
-        parser = subparsers.add_parser('setup', help='Install parcels to the virtualenv')
+        parser = subparsers.add_parser('setup',
+                                       help='Create a virtualenv and '
+                                       'add parcels to it.')
         parser.set_defaults(func=self.run)
