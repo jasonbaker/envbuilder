@@ -1,6 +1,6 @@
 [project]
 parcels = force_list()
-requires = force_list()
+requires = force_list(default=list())
 easy_install = string(default='$PWD/bin/easy_install')
     [[DEFAULT]]
     [[__many__]]
