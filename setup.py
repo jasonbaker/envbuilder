@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='envbuilder',
-    version='0.1.0',
+    version='0.1.0a',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj', 'argparse'],
