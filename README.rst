@@ -45,18 +45,19 @@ example for the README::
     	setup = '$python setup.py develop'
     	checkout = '$git_checkout'
     
-### The sections
+The sections
+~~~~~~~~~~~~~~~~~~
 
 * *project* - This section is the top-level section.  The only option it 
-contains is "parcels".  This is a list of all of the parcels to be installed
-into the virtualenv.
+  contains is "parcels".  This is a list of all of the parcels to be installed
+  into the virtualenv.
 
 * *DEFAULT* - In this particular example, this particular section is probably
-not very meaningful.  However, when using multiple parcels, it is useful to
-define default values to be used in each section.
+  not very meaningful.  However, when using multiple parcels, it is useful to
+  define default values to be used in each section.
 
 * *envbuilder* - Here's where we actually define a parcel.  There are 
-currently only two options that need to be defined: setup and checkout.    
+  currently only two options that need to be defined: setup and checkout.    
 
 You'll notice that in both of these options, we use something called
 *string interpolation*.  Every part that begins with a $ is defined
@@ -109,8 +110,3 @@ Envbuilder was designed to be flexible enough that it could *theoretically*
 be used with other languages, but this has not yet been tried.  Any saps 
 (aka "open source developers") willing to test this out are encouraged
 to do so!
-    
-TODO
--------------
-
-* Allow creation of custom commands.
