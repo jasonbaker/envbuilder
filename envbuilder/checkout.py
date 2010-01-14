@@ -6,3 +6,6 @@ class Checkout(object):
             cmd = parcel['checkout']
             sh(cmd)
             
+    def add_args(self, subparsers):
+        parser = subparsers.add_parser('checkout', help='Check out parcels')
+        parser.set_defaults(func=self.run)

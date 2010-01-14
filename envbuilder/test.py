@@ -1,8 +1,14 @@
 import subprocess, sys
+from argparse import ArgumentParser
 
 class Test(object):
     def run(self, args, config):
-        failed = config.run_command('test')
+        if args.parcels:
+            parcels = config.select_parcels(args.parcels.split(','))
+        else:
+            parcels = config.parcels
+
+        failed = config.run_command('test', parcels=parcels)
         if failed:
             print '%s parcels had failing tests:' % len(failed)
             print '================='
@@ -11,3 +17,10 @@ class Test(object):
             sys.exit(1)
         else:
             print 'All tests passing.'
+
+    def add_args(self, subparsers):
+        parser = subparsers.add_parser('test', help='Run tests.')
+        parser.add_argument('-p', '--parcels', default=None,
+                            help='A comma-separated list of parcels to run tests against.')
+        parser.set_defaults(func=self.run)
+        

@@ -1,9 +1,7 @@
 import argparse
 
-def get_args():
+def get_arg_parser():
     parser = argparse.ArgumentParser(
         description='build a set of projects'
         )
-    parser.add_argument(
-        'command', help='The command to run')
-    return parser.parse_args()
+    return parser
