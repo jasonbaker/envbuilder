@@ -6,7 +6,7 @@ readme.close()
 
 setup(
     name='envbuilder',
-    version='0.1.0a',
+    version='0.1.0a2',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj', 'argparse'],
