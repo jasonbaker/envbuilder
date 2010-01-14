@@ -11,6 +11,5 @@ class Update(object):
     def add_args(self, subparsers):
         parser = subparsers.add_parser('update',
                                        help='Update checked out parcels')
-        parser.add_argument('-p', '--parcels', default=None,
-                            help='A comma-separated list of parcels to update.')
+
         parser.set_defaults(func=self.run)
