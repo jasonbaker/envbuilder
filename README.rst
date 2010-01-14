@@ -15,7 +15,7 @@ Installing
 -------------
 
 To get started with env builder, you must first check it out from github,
-then install it:
+then install it::
 
     git clone git://github.com/jasonbaker/envbuilder.git
     cd envbuilder
@@ -30,7 +30,7 @@ The .env's file format is similar to the .ini file format, but there are
 some major differences.  The best way to illustrate this is with an example.
 The following will make a virtualenv with envbuilder installed.  There's
 probably not any good reason to do this other than to provide an easy
-example for the README.
+example for the README::
 
     [project]
     parcels = 'envbuilder', # Note the comma
@@ -70,7 +70,7 @@ the following:
 
 To run this, copy the .env file to where you want to build the project and
 run the following commands (the output only shows the shell commands, but the
-output is left out for brevity's sake):
+output is left out for brevity's sake)::
 
     envbuilder co
     --> git clone git://github.com/jasonbaker/envbuilder.git
