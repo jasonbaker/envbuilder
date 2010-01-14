@@ -14,14 +14,19 @@ careful.
 Installing
 -------------
 
-To get started with env builder, you must first check it out from github,
-then install it::
+To install envbuilder, you have two options:  installing from git or installing
+from pypi.  If you would like to install via git, use the following set of
+commands::
 
     git clone git://github.com/jasonbaker/envbuilder.git
     cd envbuilder
     python setup.py install 
     # if you plan on making changes to envbuilder, use this command:
     python setup.py develop
+
+If you would like to install from pypi, you should use `pip <http://pypi.python.org/pypi/pip/0.6.1>`_::
+
+    pip install envbuilder
 
 The .env file
 ------------------
