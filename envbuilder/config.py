@@ -1,6 +1,7 @@
 import subprocess
 from os import environ
 from os.path import dirname, abspath, join
+from string import Template
 
 from configobj import ConfigObj
 from validate import Validator
@@ -19,6 +20,7 @@ class Config(object):
             self._config = ConfigObj(filepath, unrepr=True,
                                      interpolation='Template',
                                      configspec=configspec)
+            self._config.update(environ)
             self._val = Validator()
             self._config.validate(self._val)
         else:

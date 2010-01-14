@@ -1,8 +1,13 @@
 [project]
 parcels = force_list()
-___many___ = string()
-       [[__many__]]
-       vcs = string()
+    [[DEFAULT]]
+    [[__many__]]
        url = string()
        build = string(default='$python setup.py develop')
        svn_checkout = string(default='svn co $url $name')
+# This is currently unused
+[commands]
+	[[__many__]]
+	name = string()
+	required = boolean(default=True)
+	default = string()
