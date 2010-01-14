@@ -37,8 +37,7 @@ example for the README.
     
     	[[DEFAULT]]
     	git_checkout = 'git clone $url'
-    	cwd = '/home/jason/src/envbuilder-src'
-    	python = '$cwd/bin/python'
+    	python = '$PWD/bin/python'
     		
     	[[envbuilder]]
     	name = 'envbuilder'
@@ -67,6 +66,7 @@ the following:
    1. The current section.
    2. The DEFAULT subsection of the project section.
    3. The project section.
+   4. The system's environment variables
 
 To run this, copy the .env file to where you want to build the project and
 run the following commands (the output only shows the shell commands, but the
