@@ -22,7 +22,6 @@ class Config(object):
                                      interpolation='Template',
                                      configspec=configspec)
             self._config.update(environ)
-            self._config['commands']['PARCEL_WD'] = WorkingDirPlaceholder()
             self._val = Validator()
             self._config.validate(self._val)
         else:
@@ -81,6 +80,7 @@ class Config(object):
             return self.args.parcels.split(',')
         else:
             return self._config['project']['parcels']
+        
     @property
     def parcels(self):
         parcel_names = self.parcel_names
