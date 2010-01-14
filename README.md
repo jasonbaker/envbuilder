@@ -114,4 +114,3 @@ TODO
 -------------
 
 * Allow creation of custom commands.
-* Add a help command.
