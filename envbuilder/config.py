@@ -1,16 +1,14 @@
 import subprocess
 from os import environ
 from os.path import dirname, abspath, join
-from string import Template
 
 from configobj import ConfigObj
 from validate import Validator
+from pkg_resources import resource_filename
 
 from envbuilder.sh import sh
-from envbuilder.custom import WorkingDirPlaceholder
 
-this_directory = abspath(dirname(__file__))
-configspec = join(this_directory, 'configspec')
+configspec = resource_filename(__name__, 'configspec')
 
 class Config(object):
     _config = None

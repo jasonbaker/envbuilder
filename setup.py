@@ -6,11 +6,12 @@ readme.close()
 
 setup(
     name='envbuilder',
-    version='0.1.0a2',
+    version='0.1.1',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj', 'argparse'],
-    zip_safe=True,
+    zip_safe=False,
+    include_package_data=True,
     entry_points = {
         'console_scripts' : [
             'envbuilder = envbuilder.run:main'
