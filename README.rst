@@ -8,7 +8,7 @@ the virtualenv.
 
 It is mainly tested under Linux, but it should work under any platform that
 supports unix-y commands (including cygwin).  In fact, you might even be
-able to make one config file work on both Windows and *nix if you're
+able to make one config file work on both Windows and \*nix if you're
 careful.
 
 Installing
