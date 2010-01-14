@@ -7,6 +7,7 @@ from configobj import ConfigObj
 from validate import Validator
 
 from envbuilder.sh import sh
+from envbuilder.custom import WorkingDirPlaceholder
 
 this_directory = abspath(dirname(__file__))
 configspec = join(this_directory, 'configspec')
@@ -14,21 +15,27 @@ configspec = join(this_directory, 'configspec')
 class Config(object):
     _config = None
     _val = None
-    def __init__(self, filepath=None, config=None, name=None):
+    def __init__(self, filepath=None, config=None, name=None, args=None):
         assert (filepath or config), "Either filepath or config must be specified!"
         if not config:
             self._config = ConfigObj(filepath, unrepr=True,
                                      interpolation='Template',
                                      configspec=configspec)
             self._config.update(environ)
+            self._config['commands']['PARCEL_WD'] = WorkingDirPlaceholder()
             self._val = Validator()
             self._config.validate(self._val)
         else:
             self._config = config
             self.name = name
 
+        self.args = args
+
     def __getitem__(self, name):
         return self._config[name]
+
+    def get(self, *args, **kwargs):
+        return self._config.get(*args, **kwargs)
 
     def _get_python(self):
         return abspath(self._config['project']['python'])
@@ -69,9 +76,15 @@ class Config(object):
                 in parcel_names]
     
     @property
+    def parcel_names(self):
+        if self.args:
+            return self.args.parcels.split(',')
+        else:
+            return self._config['project']['parcels']
+    @property
     def parcels(self):
+        parcel_names = self.parcel_names
         project = self._config['project']
-        parcel_names = project['parcels']
         if not isinstance(parcel_names, (list, tuple)):
             parcel_names = [parcel_names]
         for parcel_name in parcel_names:

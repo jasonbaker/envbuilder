@@ -8,6 +8,7 @@ parcels = force_list()
 # This is currently unused
 [commands]
 	[[__many__]]
-	name = string()
 	required = boolean(default=True)
 	default = string()
+	working_dir = string(default='$PWD')
+	help = string(default='')
