@@ -6,7 +6,9 @@ readme.close()
 
 setup(
     name='envbuilder',
-    version='0.1.1',
+    author='Jason Baker',
+    author_email='amnorvend@gmail.com',
+    version='0.1.2',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj', 'argparse'],
@@ -18,5 +20,6 @@ setup(
             ]
         },
     description = "A package for automatic generation of virtualenvs",
-    long_description = README_TEXT
+    long_description = README_TEXT,
+    url='http://github.com/jasonbaker/envbuilder',
     )
