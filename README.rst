@@ -87,8 +87,7 @@ String Interpolation
 
 You'll notice that in this example, we use something called
 *string interpolation*.  Every part that begins with a $ is defined
-somewhere else in the config file.  The order that it uses to check is
-the following:
+elsewhere.  The order that it uses to check is the following:
 
    1. The current section.
    2. The DEFAULT subsection of the project section.
