@@ -28,6 +28,7 @@ def main():
             CustomCommand(section=command_section[command_name],
                           name=command_name).add_args(subparsers)
     args = parser.parse_args()
+    config.args = args
     args.func(args=args, config=config)
 
     
