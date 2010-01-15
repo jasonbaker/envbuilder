@@ -74,7 +74,7 @@ class Config(object):
     
     @property
     def parcel_names(self):
-        if self.args:
+        if self.args.parcels:
             return self.args.parcels.split(',')
         else:
             return self._config['project']['parcels']
