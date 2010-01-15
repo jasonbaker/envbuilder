@@ -53,18 +53,39 @@ example for the README::
 The sections
 ~~~~~~~~~~~~~~~~~~
 
-* *project* - This section is the top-level section.  The only option it 
-  contains is "parcels".  This is a list of all of the parcels to be installed
-  into the virtualenv.
+project
+++++++++++++++++++++
 
-* *DEFAULT* - In this particular example, this particular section is probably
-  not very meaningful.  However, when using multiple parcels, it is useful to
-  define default values to be used in each section.
+This section is the top-level section.  It has two possible options:
 
-* *envbuilder* - Here's where we actually define a parcel.  There are 
-  currently only two options that need to be defined: setup and checkout.    
+* **parcels** - These are the parcels to be installed in the order they are
+  to be installed.  This is a list delimited by commas.
 
-You'll notice that in both of these options, we use something called
+* **requires** - This is a list of packages that will be easy_installed into
+  the virtualenv.
+
+DEFAULT
++++++++++++++++++++++
+
+In this particular example, this particular section is probably
+not very meaningful.  However, when using multiple parcels, it is useful to
+define default values to be used in each section.  Note that these values
+are currently only used in string interpolation.  There is no "inheritance"
+concept.
+
+envbuilder
++++++++++++++++++++++
+
+Here's where we actually define a parcel.  There are 
+currently only two options that need to be defined: setup and checkout.
+
+These are the shell commands that are run when you use ``envbuilder 
+setup`` and ``envbuilder checkout`` (respectively).
+
+String Interpolation
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You'll notice that in this example, we use something called
 *string interpolation*.  Every part that begins with a $ is defined
 somewhere else in the config file.  The order that it uses to check is
 the following:
