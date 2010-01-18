@@ -6,6 +6,7 @@ from envbuilder.checkout import Checkout
 from envbuilder.setup import Setup
 from envbuilder.test import Test
 from envbuilder.update import Update
+from envbuilder.clean_pyc import CleanPyc
 from envbuilder.custom import CustomCommand
 from envbuilder.args import get_arg_parser
 
@@ -13,6 +14,7 @@ commands = [Checkout(),
             Setup(),
             Test(),
             Update(),
+            CleanPyc()
             ]
 
 def main():
