@@ -114,6 +114,73 @@ also see that the checkout command was translated in the following steps:
  2. git clone $url
  3. git clone git://github.com/jasonbaker/envbuilder.git
 
+Custom Commands
+~~~~~~~~~~~~~~~~~~~~~
+
+Now let's add a custom command to this.  Suppose we want to write a command
+that can give us the current status of our checked-out git repository.  The
+finished .env file will look like this::
+
+    [project]
+    parcels = 'envbuilder', # Note the comma
+    
+    	[[DEFAULT]]
+    	git_checkout = 'git clone $url'
+    	cwd = '/home/jason/src/envbuilder-src'
+    	python = '$cwd/bin/python'
+    		
+    	[[envbuilder]]
+    	name = 'envbuilder'
+    	url = 'git://github.com/jasonbaker/envbuilder.git'
+    	setup = '$python setup.py develop'
+    	checkout = '$git_checkout'
+        
+    [commands]
+    	[[ status ]]
+    	required = True
+    	default = 'git status'
+    	working_dir = '$$PARCEL_WD'
+    	help = 'Check the status of all checked-out parcels'
+
+This works much like envbuilder's built in commands.  Each parcel can
+override the default behavior by adding an option with the same name
+as the command.  For instance, suppose we wanted to keep ``git status``
+as the default behavior, but we wanted to make envbuilder's output use
+the verbose flag.  We could change the above to this::
+
+    [project]
+    parcels = 'envbuilder', # Note the comma
+    
+    	[[DEFAULT]]
+    	git_checkout = 'git clone $url'
+    	cwd = '/home/jason/src/envbuilder-src'
+    	python = '$cwd/bin/python'
+    		
+    	[[envbuilder]]
+    	name = 'envbuilder'
+    	url = 'git://github.com/jasonbaker/envbuilder.git'
+    	setup = '$python setup.py develop'
+    	checkout = '$git_checkout'
+	update = 'git status -v'
+        
+    [commands]
+    	[[ status ]]
+    	required = True
+    	default = 'git status'
+    	working_dir = '$$PARCEL_WD'
+    	help = 'Check the status of all checked-out parcels'
+
+A command has the following options:
+
+ * **required** - If this is True and no default is set, an error will
+   be raised if a parcel has not defined its own way to run this command
+ * **default** - If a parcel does not have its own way of running this
+   command, use this instead.
+ * **working_dir** - The directory to run this within.  If this is set to
+   ``$$PARCEL_WD``, it will be run from within the parcel's directory.
+ * **help** - The help text that will be given when ``envbuilder -h`` is
+   run.
+
 Questions
 ------------------
 
