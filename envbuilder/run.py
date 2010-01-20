@@ -1,3 +1,4 @@
+import sys
 import os.path
 
 from envbuilder.config import Config
@@ -17,8 +18,13 @@ commands = [Checkout(),
 def main():
     cwd = os.path.abspath(os.path.curdir)
     filepath = os.path.join(cwd, '.env')
-    config = Config(filepath)
     parser = get_arg_parser()
+    if not os.path.isfile(filepath):
+        sys.stderr.write('ERROR: This directory does not contain a .env file '
+                         'or the .env file is a directory.\n')
+        sys.exit(1)
+    config = Config(filepath)
+
     subparsers = parser.add_subparsers()
     for command in commands:
         command.add_args(subparsers)
