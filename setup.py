@@ -11,7 +11,7 @@ setup(
     version='0.2.0',
     packages=find_packages(),
     setup_requires=['nose'],
-    install_requires=['ConfigObj', 'argparse'],
+    install_requires=['ConfigObj', 'argparse', 'anyjson', 'simplejson'],
     zip_safe=False,
     include_package_data=True,
     entry_points = {
