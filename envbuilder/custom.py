@@ -27,7 +27,7 @@ class CustomCommand(object):
             cwd = self._section['working_dir']
             # Single $ here since this will have already been run
             # through string interpolation
-            cwd = cwd.replace('$PARCEL_WD', os.path.abspath(parcel.name))
+            cwd = cwd.replace('$PARCEL_WD', os.path.abspath(parcel['dir']))
             sh(cmd_text, cwd = cwd)
             
     def add_args(self, subparsers):

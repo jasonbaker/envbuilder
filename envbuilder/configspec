@@ -4,6 +4,7 @@ requires = force_list(default=list())
 easy_install = string(default='$PWD/bin/easy_install')
     [[DEFAULT]]
     [[__many__]]
+       dir = string(default='$name')
        url = string()
        build = string(default='$python setup.py develop')
        svn_checkout = string(default='svn co $url $name')
