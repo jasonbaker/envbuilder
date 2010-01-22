@@ -4,7 +4,7 @@ from envbuilder.sh import sh
 
 class Setup(object):
     def run(self, args, config):
-        if args.create:
+        if not args.no_create:
             sh('virtualenv --no-site-packages --clear .')
             requirements = config['project']['requires']
             easy_install = config['project']['easy_install'] 
@@ -23,7 +23,7 @@ class Setup(object):
         parser = subparsers.add_parser('setup',
                                        help='Create a virtualenv and '
                                        'add parcels to it.')
-        parser.add_argument('-c', '--create', default=False,
+        parser.add_argument('-n', '--no-create', default=False,
                             action='store_true',
-                            help='(re)create the virtualenv')
+                            help="Don't (re)create the virtualenv")
         parser.set_defaults(func=self.run)
