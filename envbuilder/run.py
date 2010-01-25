@@ -37,6 +37,8 @@ def main():
                           name=command_name).add_args(subparsers)
     args = parser.parse_args()
     config.args = args
+    # args.func will have been set based on which command is
+    # chosen
     args.func(args=args, config=config)
 
     

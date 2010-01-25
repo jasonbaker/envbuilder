@@ -1,6 +1,9 @@
 import subprocess
 
 def sh(cmd, cwd='.'):
+    """
+    A somewhat easier interface to subprocess.check_call.
+    """
     print '-->', cmd
     if cwd != '.':
         print '(From: %s)' % cwd

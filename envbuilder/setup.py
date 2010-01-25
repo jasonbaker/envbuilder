@@ -3,6 +3,9 @@ import os.path
 from envbuilder.sh import sh
 
 class Setup(object):
+    """
+    The class that runs the 'setup' command.
+    """
     def run(self, args, config):
         if not args.no_create:
             sh('virtualenv --no-site-packages --clear .')
