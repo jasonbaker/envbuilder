@@ -82,8 +82,8 @@ envbuilder
 Here's where we actually define a parcel.  There are 
 currently only two options that need to be defined: setup and checkout.
 
-These are the shell commands that are run when you use ``envbuilder 
-setup`` and ``envbuilder checkout`` (respectively).
+These are the shell commands that are run when you use ``envb 
+setup`` and ``envb checkout`` (respectively).
 
 String Interpolation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,10 +101,10 @@ To run this, copy the .env file to where you want to build the project and
 run the following commands (the output only shows the shell commands, but the
 output is left out for brevity's sake)::
 
-    envbuilder co
+    envb co
     --> git clone git://github.com/jasonbaker/envbuilder.git
 
-    envbuilder setup
+    envb setup
     --> virtualenv --no-site-packages .
     --> /home/jason/src/envbuilder-src/bin/python setup.py develop
     (From: /home/jason/src/envbuilder-src/envbuilder)
@@ -180,7 +180,7 @@ A command has the following options:
  * **default** - If a parcel does not have its own way of running this
    command, use this instead.
  * **working_dir** - The directory to run this within.
- * **help** - The help text that will be given when ``envbuilder -h`` is
+ * **help** - The help text that will be given when ``envb -h`` is
    run.
 
 Note that you may also access a parcel's options by prefixing the name with
