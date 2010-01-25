@@ -198,8 +198,9 @@ people still use Python because programming in it is much simpler.
 
 **What revision control systems do you support?**
 
-However, you can theoretically use any revision control system
-that has a command-line interface.
+You can theoretically use any revision control system that has a 
+command-line interface.  At its most core level, envbuilder is a
+framework around the shell (with a focus around building virtualenvs).
 
 **Does envbuilder have to be used for Python?**
 
