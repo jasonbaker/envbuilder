@@ -88,7 +88,8 @@ class Config(object):
         for parcel_name in parcel_names:
             if parcel_name.upper() != 'DEFAULT':
                 yield Config(config=project[parcel_name], name=parcel_name)
-        
+
+
 class ConfigSection(object):
     _section = None
     def __init__(self, section):

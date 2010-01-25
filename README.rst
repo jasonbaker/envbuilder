@@ -45,7 +45,7 @@ example for the README::
     	python = '$PWD/bin/python'
     		
     	[[envbuilder]]
-    	name = 'envbuilder'
+    	dir = 'envbuilder'
     	url = 'git://github.com/jasonbaker/envbuilder.git'
     	setup = '$python setup.py develop'
     	checkout = '$git_checkout'
@@ -130,7 +130,7 @@ finished .env file will look like this::
     	python = '$cwd/bin/python'
     		
     	[[envbuilder]]
-    	name = 'envbuilder'
+    	dir = 'envbuilder'
     	url = 'git://github.com/jasonbaker/envbuilder.git'
     	setup = '$python setup.py develop'
     	checkout = '$git_checkout'
@@ -139,7 +139,7 @@ finished .env file will look like this::
     	[[ status ]]
     	required = True
     	default = 'git status'
-    	working_dir = '$$PARCEL_WD'
+    	working_dir = '%dir'
     	help = 'Check the status of all checked-out parcels'
 
 This works much like envbuilder's built in commands.  Each parcel can
@@ -157,7 +157,7 @@ the verbose flag.  We could change the above to this::
     	python = '$cwd/bin/python'
     		
     	[[envbuilder]]
-    	name = 'envbuilder'
+    	dir = 'envbuilder'
     	url = 'git://github.com/jasonbaker/envbuilder.git'
     	setup = '$python setup.py develop'
     	checkout = '$git_checkout'
@@ -167,7 +167,7 @@ the verbose flag.  We could change the above to this::
     	[[ status ]]
     	required = True
     	default = 'git status'
-    	working_dir = '$$PARCEL_WD'
+    	working_dir = '%dir'
     	help = 'Check the status of all checked-out parcels'
 
 A command has the following options:
@@ -176,10 +176,13 @@ A command has the following options:
    be raised if a parcel has not defined its own way to run this command
  * **default** - If a parcel does not have its own way of running this
    command, use this instead.
- * **working_dir** - The directory to run this within.  If this is set to
-   ``$$PARCEL_WD``, it will be run from within the parcel's directory.
+ * **working_dir** - The directory to run this within.
  * **help** - The help text that will be given when ``envbuilder -h`` is
    run.
+
+Note that you may also access a parcel's options by prefixing the name with
+a ``%`` instead of a ``$``.  In the above example, ``%dir`` is replaced
+with the dir option of the parcel.
 
 Questions
 ------------------
