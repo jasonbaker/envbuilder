@@ -198,8 +198,7 @@ people still use Python because programming in it is much simpler.
 
 **What revision control systems do you support?**
 
-Envbuilder currently has support for svn (via an svn_checkout default
-option).  However, you can theoretically use any revision control system
+However, you can theoretically use any revision control system
 that has a command-line interface.
 
 **Does envbuilder have to be used for Python?**
