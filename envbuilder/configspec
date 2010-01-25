@@ -7,7 +7,6 @@ easy_install = string(default='$PWD/bin/easy_install')
        dir = string(default='$name')
        url = string()
        build = string(default='$python setup.py develop')
-       svn_checkout = string(default='svn co $url $name')
 # This is currently unused
 [commands]
 	[[__many__]]
