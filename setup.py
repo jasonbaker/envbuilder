@@ -8,7 +8,7 @@ setup(
     name='envbuilder',
     author='Jason Baker',
     author_email='amnorvend@gmail.com',
-    version='0.2.0a',
+    version='0.2.0dev',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj', 'argparse', 'anyjson', 'simplejson'],
