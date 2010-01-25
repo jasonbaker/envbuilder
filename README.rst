@@ -1,6 +1,9 @@
 envbuilder
 ===============
 
+**NOTE**:  These are the docs for the version of envbuilder in git.  For
+documentation on the last release, see the `pypi_page <http://pypi.python.org/pypi/envbuilder/>`_.
+
 Envbuilder is a system for automatically building virtualenvs in Python.
 To do this, it uses a .env config file to define *parcels*, which are
 individual pieces of Python software to be checked out and installed into

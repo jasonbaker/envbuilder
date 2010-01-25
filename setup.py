@@ -1,8 +1,12 @@
 from setuptools import setup, find_packages
 
+GITHUB_ALERT = """**NOTE**:  These are the docs for the version of envbuilder in git.  For
+documentation on the last release, see the `pypi_page <http://pypi.python.org/pypi/envbuilder/>`_."""
 readme = open('README.rst', 'r')
-README_TEXT = readme.read()
+
+README_TEXT = readme.read().replace(GITHUB_ALERT, '')
 readme.close()
+from nose.tools import set_trace; set_trace()
 
 setup(
     name='envbuilder',
