@@ -4,6 +4,9 @@ documentation on the last release, see the `pypi_page <http://pypi.python.org/py
 
 .. split here
 
+.. contents:: Table of Contents
+    :depth: 2
+
 envbuilder
 ===============
 
@@ -41,9 +44,21 @@ The .env's file format is similar to the .ini file format, but there are
 some major differences.  The best way to illustrate this is with an example.
 The following will make a virtualenv with envbuilder installed.  There's
 probably not any good reason to do this other than to provide an easy
-example for the README:
+example for the README::
 
-.. include:: examples/envbuilder-simple/.env
+    [project]
+    parcels = 'envbuilder', # Note the comma
+
+        [[DEFAULT]]
+        git_checkout = 'git clone $url'
+        python = '$CWD/bin/python'
+		
+        [[envbuilder]]
+        dir = 'envbuilder'
+        url = 'git://github.com/jasonbaker/envbuilder.git'
+        setup = '$python setup.py develop'
+        checkout = '$git_checkout'
+
 
 
 The sections
@@ -103,7 +118,7 @@ output is left out for brevity's sake)::
     (From: /home/jason/src/envbuilder-src/envbuilder)
 
 As you can see, the setup command is executed from within the checked out
-envbuilder directory (which is why the $cwd variable is required).  You can 
+envbuilder directory (which is why the $CWD variable is required).  You can 
 also see that the checkout command was translated in the following steps:
 
  1. $git_checkout
@@ -122,8 +137,7 @@ finished .env file will look like this::
     
     	[[DEFAULT]]
     	git_checkout = 'git clone $url'
-    	cwd = '/home/jason/src/envbuilder-src'
-    	python = '$cwd/bin/python'
+    	python = '$CWD/bin/python'
     		
     	[[envbuilder]]
     	dir = 'envbuilder'
@@ -149,8 +163,7 @@ the verbose flag.  We could change the above to this::
     
     	[[DEFAULT]]
     	git_checkout = 'git clone $url'
-    	cwd = '/home/jason/src/envbuilder-src'
-    	python = '$cwd/bin/python'
+    	python = '$CWD/bin/python'
     		
     	[[envbuilder]]
     	dir = 'envbuilder'
