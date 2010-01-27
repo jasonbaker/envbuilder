@@ -5,7 +5,7 @@ documentation on the last release, see the `pypi_page <http://pypi.python.org/py
 .. split here
 
 .. contents:: Table of Contents
-    :depth: 2
+    :depth: 3
 
 envbuilder
 ===============
