@@ -126,7 +126,7 @@ also see that the checkout command was translated in the following steps:
  3. git clone git://github.com/jasonbaker/envbuilder.git
 
 Custom Commands
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Now let's add a custom command to this.  Suppose we want to write a command
 that can give us the current status of our checked-out git repository.  The
