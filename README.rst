@@ -211,3 +211,10 @@ Envbuilder was designed to be flexible enough that it could *theoretically*
 be used with other languages, but this has not yet been tried.  Any saps 
 (aka "open source developers") willing to test this out are encouraged
 to do so!
+
+Support
+------------------
+
+If you have any issues using envbuilder, feel free to open an issue on the
+`issue tracker <http://github.com/jasonbaker/envbuilder/issues>`_ or stop
+by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
