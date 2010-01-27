@@ -11,7 +11,6 @@ class Setup(object):
             sh('virtualenv --no-site-packages --clear .')
             requirements = config['project']['requires']
             easy_install = config['project']['easy_install'] 
-            sh('%s pip' % easy_install)
             for requirement in requirements:
                 sh('%s %s' % (easy_install, requirement))
                 
