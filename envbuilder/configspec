@@ -1,7 +1,7 @@
 [project]
 parcels = force_list()
 requires = force_list(default=list())
-easy_install = string(default='$PWD/bin/easy_install')
+easy_install = string(default='$CWD/bin/easy_install')
     [[DEFAULT]]
     [[__many__]]
        dir = string(default='$name')
@@ -12,5 +12,5 @@ easy_install = string(default='$PWD/bin/easy_install')
 	[[__many__]]
 	required = boolean(default=True)
 	default = string()
-	working_dir = string(default='$PWD')
+	working_dir = string(default='%dir')
 	help = string(default='')

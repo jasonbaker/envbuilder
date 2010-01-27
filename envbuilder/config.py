@@ -1,5 +1,5 @@
 import subprocess
-from os import environ
+from os import environ, getcwd
 from os.path import dirname, abspath, join
 
 from configobj import ConfigObj
@@ -20,6 +20,7 @@ class Config(object):
                                      interpolation='Template',
                                      configspec=configspec)
             self._config.update(environ)
+            self._config['CWD'] = getcwd()
             self._val = Validator()
             self._config.validate(self._val)
         else:
