@@ -228,7 +228,7 @@ Release Notes
 ------------------
 
 0.2.0b
-++++++++++++++++++
+~~~~~~~~~~~~~~~~~~
 
  * The name option on parcels is now set automatically from the subsection
    name.
