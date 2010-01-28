@@ -222,3 +222,17 @@ Support
 If you have any issues using envbuilder, feel free to open an issue on the
 `issue tracker <http://github.com/jasonbaker/envbuilder/issues>`_ or stop
 by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
+
+
+Release Notes
+------------------
+
+0.2.0b
+++++++++++++++++++
+
+ * The name option on parcels is now set automatically from the subsection
+   name.
+ * Added percent (command) variables.
+ * Added the CWD built-in variable.
+ * Added a dir option for parcels that defaults to the name.
+ * Removed the test command.  This can now be done with custom commands.
