@@ -73,7 +73,8 @@ This section is the top-level section.  It has two possible options:
   to be installed.  This is a list delimited by commas.
 
 * **requires** - This is a list of packages that will be easy_installed into
-  the virtualenv.
+  the virtualenv when setup is run.  If the -U flag is passed in to setup,
+  these will be upgraded.
 
 DEFAULT
 +++++++++++++++++++++
