@@ -11,3 +11,4 @@ bin
 include
 .ropeproject
 *#*
+pip-log.txt
