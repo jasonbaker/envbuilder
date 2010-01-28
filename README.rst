@@ -240,3 +240,9 @@ Release Notes
  * Added a dir option for parcels that defaults to the name.
  * Removed the test command.  This can now be done with custom commands.
  * The envbuilder entry point is now envb.
+
+0.2.0b1
+~~~~~~~~~~~~~~~~~~
+
+ * Readded the envbuilder entry point as renaming it caused some strange
+   issues.

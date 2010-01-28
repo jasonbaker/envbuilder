@@ -22,7 +22,8 @@ setup(
     include_package_data=True,
     entry_points = {
         'console_scripts' : [
-            'envb = envbuilder.run:main'
+            'envb = envbuilder.run:main',
+            'envbuilder = envbuilder.run:main'            
             ]
         },
     description = "A package for automatic generation of virtualenvs",
