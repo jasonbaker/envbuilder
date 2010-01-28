@@ -12,7 +12,7 @@ setup(
     name='envbuilder',
     author='Jason Baker',
     author_email='amnorvend@gmail.com',
-    version='0.2.0b',
+    version='0.2.0b1',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj', 'argparse', 'pip', 'virtualenv'],
