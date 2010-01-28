@@ -239,3 +239,4 @@ Release Notes
  * Added the CWD built-in variable.
  * Added a dir option for parcels that defaults to the name.
  * Removed the test command.  This can now be done with custom commands.
+ * The envbuilder entry point is now envb.
