@@ -5,22 +5,26 @@ documentation on the last release, see the `pypi_page <http://pypi.python.org/py
 readme = open('README.rst', 'r')
 
 README_TEXT = readme.read().replace(GITHUB_ALERT, '')
+unsplit_readme_text = readme.read()
+split_text = [x for x in unsplit_readme_text.split('.. split here')
+              if x]
+print split_text
+README_TEXT = split_text[-1]
 readme.close()
-from nose.tools import set_trace; set_trace()
 
 setup(
     name='envbuilder',
     author='Jason Baker',
     author_email='amnorvend@gmail.com',
-    version='0.2.0a',
+    version='0.2.0b',
     packages=find_packages(),
     setup_requires=['nose'],
-    install_requires=['ConfigObj', 'argparse', 'anyjson', 'simplejson'],
+    install_requires=['ConfigObj', 'argparse', 'pip', 'virtualenv'],
     zip_safe=False,
     include_package_data=True,
     entry_points = {
         'console_scripts' : [
-            'envbuilder = envbuilder.run:main'
+            'envb = envbuilder.run:main'
             ]
         },
     description = "A package for automatic generation of virtualenvs",

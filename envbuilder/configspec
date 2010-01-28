@@ -1,17 +1,16 @@
 [project]
 parcels = force_list()
 requires = force_list(default=list())
-easy_install = string(default='$PWD/bin/easy_install')
+easy_install = string(default='$CWD/bin/easy_install')
     [[DEFAULT]]
     [[__many__]]
        dir = string(default='$name')
        url = string()
        build = string(default='$python setup.py develop')
-       svn_checkout = string(default='svn co $url $name')
 # This is currently unused
 [commands]
 	[[__many__]]
 	required = boolean(default=True)
 	default = string()
-	working_dir = string(default='$PWD')
+	working_dir = string(default='%dir')
 	help = string(default='')

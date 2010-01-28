@@ -9,3 +9,5 @@ build
 lib
 bin
 include
+.ropeproject
+*#*

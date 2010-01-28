@@ -1,5 +1,5 @@
 import subprocess
-from os import environ
+from os import environ, getcwd
 from os.path import dirname, abspath, join
 
 from configobj import ConfigObj
@@ -20,11 +20,14 @@ class Config(object):
                                      interpolation='Template',
                                      configspec=configspec)
             self._config.update(environ)
+            self._config['CWD'] = getcwd()
             self._val = Validator()
             self._config.validate(self._val)
         else:
             self._config = config
             self.name = name
+            if not self._config.get('name'):
+                self._config['name'] = self.name
 
         self.args = args
 
@@ -58,7 +61,7 @@ class Config(object):
                 for step in run_steps:
 
                     if cwd is None:
-                        sh(step, join('.', parcel['name']))
+                        sh(step, join('.', parcel['dir']))
                     else:
                         sh(step, cwd)
             except subprocess.CalledProcessError:

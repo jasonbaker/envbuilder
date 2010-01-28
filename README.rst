@@ -1,3 +1,12 @@
+
+**NOTE**:  These are the docs for the version of envbuilder in git.  For
+documentation on the last release, see the `pypi_page <http://pypi.python.org/pypi/envbuilder/>`_.
+
+.. split here
+
+.. contents:: Table of Contents
+    :depth: 3
+
 envbuilder
 ===============
 
@@ -42,17 +51,19 @@ example for the README::
 
     [project]
     parcels = 'envbuilder', # Note the comma
-    
-    	[[DEFAULT]]
-    	git_checkout = 'git clone $url'
-    	python = '$PWD/bin/python'
-    		
-    	[[envbuilder]]
-    	dir = 'envbuilder'
-    	url = 'git://github.com/jasonbaker/envbuilder.git'
-    	setup = '$python setup.py develop'
-    	checkout = '$git_checkout'
-    
+
+        [[DEFAULT]]
+        git_checkout = 'git clone $url'
+        python = '$CWD/bin/python'
+		
+        [[envbuilder]]
+        dir = 'envbuilder'
+        url = 'git://github.com/jasonbaker/envbuilder.git'
+        setup = '$python setup.py develop'
+        checkout = '$git_checkout'
+
+
+
 The sections
 ~~~~~~~~~~~~~~~~~~
 
@@ -65,7 +76,8 @@ This section is the top-level section.  It has two possible options:
   to be installed.  This is a list delimited by commas.
 
 * **requires** - This is a list of packages that will be easy_installed into
-  the virtualenv.
+  the virtualenv when setup is run.  If the -U flag is passed in to setup,
+  these will be upgraded.
 
 DEFAULT
 +++++++++++++++++++++
@@ -82,8 +94,8 @@ envbuilder
 Here's where we actually define a parcel.  There are 
 currently only two options that need to be defined: setup and checkout.
 
-These are the shell commands that are run when you use ``envbuilder 
-setup`` and ``envbuilder checkout`` (respectively).
+These are the shell commands that are run when you use ``envb 
+setup`` and ``envb checkout`` (respectively).
 
 String Interpolation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,16 +113,16 @@ To run this, copy the .env file to where you want to build the project and
 run the following commands (the output only shows the shell commands, but the
 output is left out for brevity's sake)::
 
-    envbuilder co
+    envb co
     --> git clone git://github.com/jasonbaker/envbuilder.git
 
-    envbuilder setup
+    envb setup
     --> virtualenv --no-site-packages .
     --> /home/jason/src/envbuilder-src/bin/python setup.py develop
     (From: /home/jason/src/envbuilder-src/envbuilder)
 
 As you can see, the setup command is executed from within the checked out
-envbuilder directory (which is why the $cwd variable is required).  You can 
+envbuilder directory (which is why the $CWD variable is required).  You can 
 also see that the checkout command was translated in the following steps:
 
  1. $git_checkout
@@ -118,7 +130,7 @@ also see that the checkout command was translated in the following steps:
  3. git clone git://github.com/jasonbaker/envbuilder.git
 
 Custom Commands
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 Now let's add a custom command to this.  Suppose we want to write a command
 that can give us the current status of our checked-out git repository.  The
@@ -129,8 +141,7 @@ finished .env file will look like this::
     
     	[[DEFAULT]]
     	git_checkout = 'git clone $url'
-    	cwd = '/home/jason/src/envbuilder-src'
-    	python = '$cwd/bin/python'
+    	python = '$CWD/bin/python'
     		
     	[[envbuilder]]
     	dir = 'envbuilder'
@@ -156,8 +167,7 @@ the verbose flag.  We could change the above to this::
     
     	[[DEFAULT]]
     	git_checkout = 'git clone $url'
-    	cwd = '/home/jason/src/envbuilder-src'
-    	python = '$cwd/bin/python'
+    	python = '$CWD/bin/python'
     		
     	[[envbuilder]]
     	dir = 'envbuilder'
@@ -180,7 +190,7 @@ A command has the following options:
  * **default** - If a parcel does not have its own way of running this
    command, use this instead.
  * **working_dir** - The directory to run this within.
- * **help** - The help text that will be given when ``envbuilder -h`` is
+ * **help** - The help text that will be given when ``envb -h`` is
    run.
 
 Note that you may also access a parcel's options by prefixing the name with
@@ -198,9 +208,9 @@ people still use Python because programming in it is much simpler.
 
 **What revision control systems do you support?**
 
-Envbuilder currently has support for svn (via an svn_checkout default
-option).  However, you can theoretically use any revision control system
-that has a command-line interface.
+You can theoretically use any revision control system that has a 
+command-line interface.  At its most core level, envbuilder is a
+framework around the shell (with a focus around building virtualenvs).
 
 **Does envbuilder have to be used for Python?**
 
@@ -208,3 +218,24 @@ Envbuilder was designed to be flexible enough that it could *theoretically*
 be used with other languages, but this has not yet been tried.  Any saps 
 (aka "open source developers") willing to test this out are encouraged
 to do so!
+
+Support
+------------------
+
+If you have any issues using envbuilder, feel free to open an issue on the
+`issue tracker <http://github.com/jasonbaker/envbuilder/issues>`_ or stop
+by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
+
+
+Release Notes
+------------------
+
+0.2.0b
+~~~~~~~~~~~~~~~~~~
+
+ * The name option on parcels is now set automatically from the subsection
+   name.
+ * Added percent (command) variables.
+ * Added the CWD built-in variable.
+ * Added a dir option for parcels that defaults to the name.
+ * Removed the test command.  This can now be done with custom commands.
