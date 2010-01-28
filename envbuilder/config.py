@@ -26,6 +26,8 @@ class Config(object):
         else:
             self._config = config
             self.name = name
+            if not self._config.get('name'):
+                self._config['name'] = self.name
 
         self.args = args
 
