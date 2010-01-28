@@ -19,7 +19,7 @@ class Setup(object):
             if not isinstance(build_cmds, (list, tuple)):
                 build_cmds = [build_cmds]
             for build_cmd in build_cmds:
-                sh(build_cmd, cwd=os.path.abspath(parcel['name']))
+                sh(build_cmd, cwd=os.path.abspath(parcel['dir']))
 
     def add_args(self, subparsers):
         parser = subparsers.add_parser('setup',

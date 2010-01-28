@@ -59,7 +59,7 @@ class Config(object):
                 for step in run_steps:
 
                     if cwd is None:
-                        sh(step, join('.', parcel['name']))
+                        sh(step, join('.', parcel['dir']))
                     else:
                         sh(step, cwd)
             except subprocess.CalledProcessError:
