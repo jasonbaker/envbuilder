@@ -4,11 +4,9 @@ GITHUB_ALERT = """**NOTE**:  These are the docs for the version of envbuilder in
 documentation on the last release, see the `pypi_page <http://pypi.python.org/pypi/envbuilder/>`_."""
 readme = open('README.rst', 'r')
 
-README_TEXT = readme.read().replace(GITHUB_ALERT, '')
 unsplit_readme_text = readme.read()
 split_text = [x for x in unsplit_readme_text.split('.. split here')
               if x]
-print split_text
 README_TEXT = split_text[-1]
 readme.close()
 
