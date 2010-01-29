@@ -37,12 +37,6 @@ class Config(object):
     def get(self, *args, **kwargs):
         return self._config.get(*args, **kwargs)
 
-    def _get_python(self):
-        return abspath(self._config['project']['python'])
-
-    def _raw(self):
-        return self._config
-
     def run_command(self, cmd, cwd=None, parcels=None):
         """
         Run a command on all parcels.  The argument cmd specifies the
@@ -91,11 +85,3 @@ class Config(object):
         for parcel_name in parcel_names:
             if parcel_name.upper() != 'DEFAULT':
                 yield Config(config=project[parcel_name], name=parcel_name)
-
-
-class ConfigSection(object):
-    _section = None
-    def __init__(self, section):
-        self._section = section
-    def __getattr__(self, name):
-        return self._section[name]
