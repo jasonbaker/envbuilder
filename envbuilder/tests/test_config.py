@@ -11,6 +11,7 @@ def test_getitem():
 @raises(KeyError)
 def test_getitem_keyerror():
     cfg = Config(config={'foo' : 'bar'})
+    # Force an error
     cfg['asdf']
 
 def test_parcels():
