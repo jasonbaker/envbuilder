@@ -19,6 +19,6 @@ class Test(object):
             print 'All tests passing.'
 
     def add_args(self, subparsers):
-        parser = subparsers.add_parser('test', help='Run tests.')
+        parser = subparsers.add_parser('test', help='Run tests (deprecated)')
         parser.set_defaults(func=self.run)
         
