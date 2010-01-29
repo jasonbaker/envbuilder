@@ -227,6 +227,18 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 Release Notes
 ------------------
 
+0.2.0b2
+~~~~~~~~~~~~~~~~~~
+
+ * Required the correct version of ConfigObj.  This update is not necessary
+   if you already have a working envbuilder installation.
+
+0.2.0b1
+~~~~~~~~~~~~~~~~~~
+
+ * Readded the envbuilder entry point as renaming it caused some strange
+   issues.
+
 0.2.0b
 ~~~~~~~~~~~~~~~~~~
 
@@ -238,8 +250,3 @@ Release Notes
  * Removed the test command.  This can now be done with custom commands.
  * The envbuilder entry point is now envb.
 
-0.2.0b1
-~~~~~~~~~~~~~~~~~~
-
- * Readded the envbuilder entry point as renaming it caused some strange
-   issues.
