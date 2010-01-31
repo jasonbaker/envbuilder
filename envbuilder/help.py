@@ -23,3 +23,9 @@ class Help(BuiltinCommand):
 
     def print_base_help(self):
         print "Placeholder"
+
+    def print_help(self):
+        args = sys.argv[1:]
+        args.append('help')
+        next_cmd = ' '.join(args)
+        print "Run envbuilder %s for more info." % next_cmd
