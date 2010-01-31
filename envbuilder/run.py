@@ -21,8 +21,10 @@ def main():
     command_section = config['commands']
     for command_name in command_section.sections:
         if command_name != 'DEFAULT':
-            make_custom_command(section=command_section[command_name],
-                          name=command_name)
+            section=command_section[command_name]
+            make_custom_command(section=section,
+                                name=command_name,
+                                aliases=section['aliases'])
     command_cls = Command.lookup_command(args.command)
     command = command_cls()
     # hack - We need config to get the command, but we also need command
