@@ -1,11 +1,13 @@
-import os.path
+import os.path, sys
 
 from envbuilder.sh import sh
+from envbuilder.command import BuiltinCommand
 
-class Setup(object):
+class Setup(BuiltinCommand):
     """
     The class that runs the 'setup' command.
     """
+    names = [ 'setup' ]
     def run(self, args, config):
         if not args.no_create:
             sh('virtualenv --no-site-packages --clear .')
@@ -36,3 +38,4 @@ class Setup(object):
                             action='store_true',
                             help='Upgrade requirements listed in the .env file')
         parser.set_defaults(func=self.run)
+

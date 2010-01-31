@@ -1,4 +1,7 @@
+import sys
+
 import os.path
+from envbuilder.command import BuiltinCommand
 from envbuilder.template import PercentTemplater
 
 from envbuilder.sh import sh
@@ -6,7 +9,14 @@ from envbuilder.sh import sh
 class WorkingDirPlaceholder(object):
     pass
 
-class CustomCommand(object):
+def make_custom_command(section, name, aliases):
+    class CommandFromEnv(_CustomCommand):
+        names = name + aliases
+        _name = name
+        _section = section
+        
+
+class _CustomCommand(BuiltinCommand):
     """
     A custom command defined in the .env file.
     """

@@ -10,7 +10,9 @@ def sh(cmd, cwd='.'):
     # Eliminate empties
     cmd_list = [x for x in cmd.split() if x]
     try:
-        subprocess.check_call(cmd_list, cwd=cwd)
+        # So we can pass in an empty string to do nothing
+        if cmd:
+            subprocess.check_call(cmd_list, cwd=cwd)
     except subprocess.CalledProcessError, e:
         cmd = ' '.join(e.cmd)
         returncode = e.returncode
