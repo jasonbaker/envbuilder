@@ -11,7 +11,7 @@ class WorkingDirPlaceholder(object):
 
 def make_custom_command(section, name, aliases):
     class CommandFromEnv(_CustomCommand):
-        names = name + aliases
+        names = [name] + aliases
         _name = name
         _section = section
         
