@@ -14,7 +14,7 @@ setup(
     name='envbuilder',
     author='Jason Baker',
     author_email='amnorvend@gmail.com',
-    version='0.2.0b2',
+    version='0.2.0rc',
     packages=find_packages(),
     setup_requires=['nose'],
     install_requires=['ConfigObj>=4.7.0', 'argparse', 'pip', 'virtualenv'],
