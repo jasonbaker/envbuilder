@@ -2,6 +2,7 @@ import sys
 
 from envbuilder.command import BuiltinCommand, Command
 from envbuilder.args import Arguments
+from envbuilder.sh import output_packages
 
 class Help(BuiltinCommand):
     names = ['help']
@@ -18,11 +19,11 @@ class Help(BuiltinCommand):
             secondary_command = secondary_command_cls()
             secondary_command.print_help()
         else:
-            self.print_base_help()
+            self.print_main_help()
         sys.exit(0)
 
-    def print_base_help(self):
-        print "Placeholder"
+    def print_main_help(self):
+        output_packages(Command.builtin_cmd_mapping, 'Built-in')
 
     def print_help(self):
         args = sys.argv[1:]

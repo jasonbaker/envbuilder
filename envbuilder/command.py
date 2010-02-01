@@ -1,12 +1,27 @@
 import sys
 
-import argparse
+import argparse, pysistence
+
+class classproperty(object):
+    """
+    This comes from Alex Martelli:
+
+    http://stackoverflow.com/questions/2173206/is-there-any-way-to-create-a-class-property-in-python/2173321#2173321
+    """
+    def __init__(self, f):
+        self.f = classmethod(f)
+    def __get__(self, *a):
+            return self.f.__get__(*a)()
 
 class Command(object):
     """
     An abstract base class for commands.
     """
     _cmd_mapping = {}
+
+    @classproperty
+    def builtin_cmd_mapping(cls):
+        return pysistence.make_dict(cls._cmd_mapping)
 
     @classmethod
     def lookup_command(cls, name):

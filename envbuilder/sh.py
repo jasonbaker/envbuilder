@@ -23,3 +23,8 @@ def sh(cmd, cwd='.'):
 def notify(cmd):
     print '-->', cmd
         
+def output_packages(pkg_dict, name):
+    for key in sorted(pkg_dict.iterkeys()):
+        package = pkg_dict[key]
+        msg = '%s:%s' % ( key.ljust(15), package.__doc__)
+        print msg
