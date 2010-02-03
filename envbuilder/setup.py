@@ -4,8 +4,9 @@ from envbuilder.sh import sh
 from envbuilder.command import BuiltinCommand
 
 class Setup(BuiltinCommand):
-    """
-    The class that runs the 'setup' command.
+    """\
+    Set up the parcels.  This usually installs the parcel into
+    the virtualenv.
     """
     names = [ 'setup' ]
     def run(self, args, config):

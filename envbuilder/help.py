@@ -1,6 +1,7 @@
 import sys
 
 from envbuilder.command import BuiltinCommand, Command
+from envbuilder.custom import _CustomCommand
 from envbuilder.args import Arguments
 from envbuilder.sh import output_packages
 
@@ -26,7 +27,13 @@ class Help(BuiltinCommand):
         sys.exit(0)
 
     def print_main_help(self):
+        print 'usage: envb [command]'
+        
         output_packages(Command.builtin_cmd_mapping, 'Built-in')
+        if _CustomCommand.custom_cmd_mapping:
+            output_packages(_CustomCommand.custom_cmd_mapping, 'From .env')
+        
+        print '\nFor more info type envb help <command>'
 
     def print_help(self):
         args = sys.argv[1:]
