@@ -1,17 +1,8 @@
-import sys
+import sys, textwrap
 
 import argparse, pysistence
 
-class classproperty(object):
-    """
-    This comes from Alex Martelli:
-
-    http://stackoverflow.com/questions/2173206/is-there-any-way-to-create-a-class-property-in-python/2173321#2173321
-    """
-    def __init__(self, f):
-        self.f = classmethod(f)
-    def __get__(self, *a):
-            return self.f.__get__(*a)()
+from envbuilder.util import classproperty
 
 class Command(object):
     """
@@ -79,6 +70,10 @@ class Command(object):
     def parse_args(self, args):
         parser = self.get_arg_parser()
         return parser.parse_args(args=args)
+
+    @classproperty
+    def brief_help(cls):
+        return cls.__doc__
 
 class MetaCommand(type):
     def __new__(cls, name, bases, dict):
