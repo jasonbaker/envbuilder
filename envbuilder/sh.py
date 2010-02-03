@@ -1,4 +1,5 @@
 import subprocess, sys
+import textwrap
 
 def sh(cmd, cwd='.'):
     """
@@ -24,7 +25,19 @@ def notify(cmd):
     print '-->', cmd
         
 def output_packages(pkg_dict, name):
+    """
+    Print out a help string from a list of packages returned by
+    Command.builtin_cmd_mapping.
+    """
     for key in sorted(pkg_dict.iterkeys()):
         package = pkg_dict[key]
-        msg = '%s:%s' % ( key.ljust(15), package.__doc__)
-        print msg
+        # The user should *never* see this
+        assert package.__doc__, '%s has an empty docstring' % package
+        help_text = textwrap.dedent(package.__doc__.strip())
+        msg = '%s - %s' % (key, help_text)
+        formatted_msg = textwrap.fill(msg,
+                                      subsequent_indent = '  ',
+                                      initial_indent='* ')
+        print formatted_msg
+
+    

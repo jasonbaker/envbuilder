@@ -5,6 +5,9 @@ from envbuilder.args import Arguments
 from envbuilder.sh import output_packages
 
 class Help(BuiltinCommand):
+    """
+    Get help.
+    """
     names = ['help']
 
     def run(self, *args, **kwargs):

@@ -4,6 +4,9 @@ from envbuilder.sh import sh
 from envbuilder.command import BuiltinCommand
 
 class Checkout(BuiltinCommand):
+    """
+    Checkout all parcels.
+    """
     names = ['checkout', 'co']
     def run(self, args, config):
         for parcel in config.parcels:
