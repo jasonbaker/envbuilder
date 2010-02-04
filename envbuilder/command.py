@@ -47,7 +47,7 @@ class Command(object):
                         prev = getattr(prev, component)
                     return prev
             except ImportError:
-                sys.stderr.write('Command "%s" not found' % name)
+                sys.stderr.write('Command "%s" not found\n\n' % name)
                 sys.exit(1)
 
     def print_help(self):
