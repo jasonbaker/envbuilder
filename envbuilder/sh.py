@@ -1,6 +1,10 @@
 import subprocess, sys
 import textwrap
 
+from envbuilder.terminal import TerminalController
+
+term = TerminalController()
+
 def sh(cmd, cwd='.'):
     """
     A somewhat easier interface to subprocess.check_call.
@@ -22,8 +26,8 @@ def sh(cmd, cwd='.'):
         sys.exit(returncode)
 
 def notify(cmd):
-    print '-->', cmd
-        
+    print term.BLUE + '--> ' + cmd + term.NORMAL
+
 def output_packages(pkg_dict, name):
     """
     Print out a help string from a list of packages returned by
