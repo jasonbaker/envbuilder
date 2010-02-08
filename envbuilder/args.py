@@ -1,9 +1,24 @@
+import sys
+
 import argparse
 
-def get_arg_parser():
-    parser = argparse.ArgumentParser(
-        description='build a set of projects'
-        )
-    parser.add_argument('-p', '--parcels', default=None,
-                        help='A comma-separated list of parcels to update.')
-    return parser
+
+class Arguments(object):
+    def __init__(self, args=sys.argv):
+        self.args = args
+
+    @property
+    def command(self):
+        try:
+            return self.args[1]
+        except IndexError:
+            # This is an empty list, so return nothing.
+            return ''
+
+    @property
+    def arguments(self):
+        try:
+            return self.args[2:]
+        except IndexError:
+            # This is an empty list, so return an empty list
+            return []

@@ -3,6 +3,9 @@ import pdb
 import os
 
 class CleanPyc(object):
+    """
+    Remove .pyc files from the parcel directories.
+    """
     def run(self, args, config):
         clean_pyc (config.parcel_names)
 

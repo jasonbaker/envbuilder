@@ -1,11 +1,14 @@
-import os.path
+import os.path, sys
 
 from envbuilder.sh import sh
+from envbuilder.command import BuiltinCommand
 
-class Setup(object):
+class Setup(BuiltinCommand):
     """
-    The class that runs the 'setup' command.
+    Set up the parcels.  This usually installs the parcel into 
+    the virtualenv.
     """
+    names = [ 'setup' ]
     def run(self, args, config):
         if not args.no_create:
             venv_opts = config['project']['virtualenv-args']
@@ -37,3 +40,4 @@ class Setup(object):
                             action='store_true',
                             help='Upgrade requirements listed in the .env file')
         parser.set_defaults(func=self.run)
+

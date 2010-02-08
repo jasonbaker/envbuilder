@@ -1,19 +1,38 @@
+import sys
 import os.path
-from envbuilder.template import PercentTemplater
 
+import pysistence
+
+from envbuilder.command import BuiltinCommand
+from envbuilder.template import PercentTemplater
 from envbuilder.sh import sh
+from envbuilder.util import classproperty
 
 class WorkingDirPlaceholder(object):
     pass
 
-class CustomCommand(object):
+def make_custom_command(section, name, aliases):
+    class CommandFromEnv(_CustomCommand):
+        names = [name] + aliases
+        _name = name
+        _section = section
+        __doc__ = section['help']
+
+        @classproperty
+        def brief_help(cls):
+            output_txt = cls.__doc__
+            return output_txt + ' (from .env)'
+        
+
+class _CustomCommand(BuiltinCommand):
     """
     A custom command defined in the .env file.
     """
-    def __init__(self, section, name):
-        self._section = section
-        self._name = name
-
+    _custom_cmd = {}
+    @classproperty
+    def custom_cmd_mapping(cls):
+        return pysistence.make_dict(cls._custom_cmd)
+    
     def run(self, args, config):
         for parcel in config.parcels:
             cmd_text = parcel.get(self._name)
@@ -44,3 +63,12 @@ class CustomCommand(object):
     def add_args(self, subparsers):
         parser = subparsers.add_parser(self._name, help=self._section['help'])
         parser.set_defaults(func=self.run)
+
+    def print_help(self):
+        print self._section['help']
+
+    # For custom commands, we must give an instance.  Therefore, this is an
+    # instance property.
+    @classproperty
+    def brief_help(self):
+        return 'foo'
