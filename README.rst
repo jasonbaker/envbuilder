@@ -227,6 +227,12 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 Release Notes
 ------------------
 
+0.2.0
+~~~~~~~~~~~~~~~~~~
+
+ * Added a couple of examples.  If you already have a working envbuilder
+   installation, there is no requirement to upgrade.
+
 0.2.0b2
 ~~~~~~~~~~~~~~~~~~
 
