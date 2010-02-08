@@ -2,11 +2,14 @@
 parcels = force_list()
 requires = force_list(default=list())
 easy_install = string(default='$CWD/bin/easy_install')
+virtualenv-args = string(default='--no-site-packages --clear .')
     [[DEFAULT]]
     [[__many__]]
        dir = string(default='$name')
        url = string()
        build = string(default='$python setup.py develop')
+       checkout=force_list()
+
 # This is currently unused
 [commands]
 	[[__many__]]
