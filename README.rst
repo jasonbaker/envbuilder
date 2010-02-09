@@ -227,6 +227,12 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 Release Notes
 ------------------
 
+0.2.1
+~~~~~~~~~~~~~~~~~~
+
+* Adding a fix so that clean_pyc doesn't delete files in the python2.6
+  directory.
+
 0.2.0
 ~~~~~~~~~~~~~~~~~~
 
