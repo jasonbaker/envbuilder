@@ -75,7 +75,13 @@ class Config(object):
             return self.args.parcels.split(',')
         else:
             return self._config['project']['parcels']
-        
+
+    @property
+    def parcel_dirs(self):
+        project_section = self._config['project']
+        for name in self.parcel_names:
+            yield project_section[name]['dir']
+            
     @property
     def parcels(self):
         parcel_names = self.parcel_names
@@ -85,3 +91,4 @@ class Config(object):
         for parcel_name in parcel_names:
             if parcel_name.upper() != 'DEFAULT':
                 yield Config(config=project[parcel_name], name=parcel_name)
+
