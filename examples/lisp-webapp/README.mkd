@@ -1,0 +1,11 @@
+This is a setup of Shaneal Manek's [trivial-lisp-webapp](http://blog.postabon.com/a-simple-lisp-webapp-for-beginners).
+
+To begin, use the following commands from within this directory:
+
+    envb checkout
+    export INSTALL_ROOT=`pwd`
+    envb setup
+    export SBCL_HOME=`pwd`/lib/sbcl
+    envb start
+
+Your web application should be ready!
