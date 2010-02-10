@@ -4,13 +4,14 @@ requires = force_list(default=list())
 easy_install = string(default='$CWD/bin/easy_install')
     [[DEFAULT]]
     [[__many__]]
+       # name is defined in config.py
        dir = string(default='$name')
        url = string()
-       build = string(default='$python setup.py develop')
+       ___many___ = force_list(default=list())
 # This is currently unused
 [commands]
 	[[__many__]]
 	required = boolean(default=True)
-	default = string()
+	default = force_list(default=list())
 	working_dir = string(default='%dir')
 	help = string(default='')

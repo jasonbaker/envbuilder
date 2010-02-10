@@ -16,8 +16,8 @@ class CustomCommand(object):
 
     def run(self, args, config):
         for parcel in config.parcels:
-            cmd_text = parcel.get(self._name)
-            if cmd_text is None:
+            cmd_text_list = parcel.get(self._name)
+            if cmd_text_list is None:
                 default = self._section.get('default')
                 if not default:
                     msg = "Parcel %s doesn't have required option %s" % (
@@ -27,14 +27,15 @@ class CustomCommand(object):
                     assert not self._section['required'], msg
                     continue
                 else:
-                    cmd_text = self._percent_escape(parcel, default)
+                    cmd_text_list = self._percent_escape(parcel, default)
             cwd = self._section['working_dir']
             cwd = self._percent_escape(parcel, cwd)
             # NOTE:  deprecated
             # Single $ here since this will have already been run
             # through string interpolation
             cwd = cwd.replace('$PARCEL_WD', os.path.abspath(parcel['dir']))
-            sh(cmd_text, cwd = cwd)
+            for cmd_text in cmd_text_list:
+                sh(cmd_text, cwd = cwd)
 
     def _percent_escape(self, parcel, text):
         templater = PercentTemplater(text)
