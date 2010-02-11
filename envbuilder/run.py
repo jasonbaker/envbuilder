@@ -16,8 +16,8 @@ def main():
 
     # reads sys.argv
     args = Arguments()
-
     config = Config(filepath)
+    handle_command_path(config)
     command_section = config['commands']
     for command_name in command_section.sections:
         if command_name != 'DEFAULT':
@@ -32,5 +32,6 @@ def main():
     config.args = command.parse_args(args.arguments)
     command.run(config.args, config)
 
-
-    
+def handle_command_path(config):
+    for path in config['project']['command-path']:
+        sys.path.append(path)
