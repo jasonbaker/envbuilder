@@ -227,6 +227,18 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 Release Notes
 ------------------
 
+0.3.0a1
+~~~~~~~~~~~~~~~~~~
+
+  (git master only)
+
+ * Added colored output.
+ * Added experimental support for custom commands written in Python.
+ * Interpolation options must now be specified in the DEFAULTS section.  This
+   currently isn't enforced at runtime, so weird errors may occur.
+ * Added a lisp webapp example.
+ * Revamped the command-running infrastructure.
+
 0.2.1
 ~~~~~~~~~~~~~~~~~~
 
