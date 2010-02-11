@@ -20,14 +20,16 @@ class Config(object):
                                      interpolation='Template',
                                      configspec=configspec)
             self._config.update(environ)
-            self._config['CWD'] = getcwd()
-            self._val = Validator()
-            self._config.validate(self._val)
         else:
             self._config = config
             self.name = name
             if not self._config.get('name'):
                 self._config['name'] = self.name
+        self._config.interpolation = 'Template'
+        self._config['CWD'] = getcwd()
+        if hasattr(self._config, 'validate'):
+            self._val = Validator()
+            self._config.validate(self._val)
 
         self.args = args
 
@@ -91,4 +93,5 @@ class Config(object):
         for parcel_name in parcel_names:
             if parcel_name.upper() != 'DEFAULT':
                 yield Config(config=project[parcel_name], name=parcel_name)
+
 

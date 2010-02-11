@@ -10,9 +10,6 @@ documentation on the last release, see the `pypi_page <http://pypi.python.org/py
 envbuilder
 ===============
 
-**NOTE**:  These are the docs for the version of envbuilder in git.  For
-documentation on the last release, see the `pypi_page <http://pypi.python.org/pypi/envbuilder/>`_.
-
 Envbuilder is a system for automatically building virtualenvs in Python.
 To do this, it uses a .env config file to define *parcels*, which are
 individual pieces of Python software to be checked out and installed into
@@ -229,6 +226,18 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 
 Release Notes
 ------------------
+
+0.2.1
+~~~~~~~~~~~~~~~~~~
+
+* Adding a fix so that clean_pyc doesn't delete files in the python2.6
+  directory.
+
+0.2.0
+~~~~~~~~~~~~~~~~~~
+
+ * Added a couple of examples.  If you already have a working envbuilder
+   installation, there is no requirement to upgrade.
 
 0.2.0b2
 ~~~~~~~~~~~~~~~~~~

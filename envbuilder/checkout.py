@@ -9,13 +9,10 @@ class Checkout(BuiltinCommand):
     """
     names = ['checkout', 'co']
     def run(self, args, config):
-        for parcel in config.parcels:
-            cmd_list = parcel['checkout']
-            for cmd in cmd_list:
-                sh(cmd)
+        config.run_command('checkout', cwd='.')
+
             
     def add_args(self, subparsers):
         parser = subparsers.add_parser('checkout', help='Check out parcels.')
         parser.set_defaults(func=self.run)
 
-sys.modules['checkout'] = Checkout
