@@ -23,8 +23,7 @@ class Config(object):
         else:
             self._config = config
             self.name = name
-            if not self._config.get('name'):
-                self._config['name'] = self.name
+            self._config['name'] = self.name
         self._config.interpolation = 'Template'
         self._config['CWD'] = getcwd()
         if hasattr(self._config, 'validate'):
@@ -55,11 +54,11 @@ class Config(object):
                 run_steps = [run_steps]
             try:
                 for step in run_steps:
-
-                    if cwd is None:
-                        sh(step, join('.', parcel['dir']))
-                    else:
-                        sh(step, cwd)
+                    if step:
+                        if cwd is None:
+                            sh(step, join('.', parcel['dir']))
+                        else:
+                            sh(step, cwd)
             except subprocess.CalledProcessError:
                 failed.append(parcel['name'])
         return failed
