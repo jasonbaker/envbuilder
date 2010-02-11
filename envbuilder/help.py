@@ -9,8 +9,7 @@ class Help(BuiltinCommand):
     """
     Get help.
     """
-    names = ['help']
-
+    name = 'help'
     def run(self, *args, **kwargs):
         # This method should never be called.  We are assuming that
         # parse_args will get called and will exit the program

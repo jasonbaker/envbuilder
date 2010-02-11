@@ -55,7 +55,8 @@ class Command(object):
         parser.print_help()
 
     def get_base_arg_parser(self):
-        parser = argparse.ArgumentParser()
+        parser = argparse.ArgumentParser(prog='envb %s' % self.name,
+                                         fromfile_prefix_chars='@')
         parser.add_argument('-p', '--parcels',
                             help = 'Select parcels to run this command on.')
         return parser
@@ -78,12 +79,14 @@ class Command(object):
 class MetaCommand(type):
     def __new__(cls, name, bases, dict):
         new_cls = type.__new__(cls, name, bases, dict)
-        for name in new_cls.names:
+        Command._cmd_mapping[new_cls.name] = new_cls
+        for name in new_cls.aliases:
             Command._cmd_mapping[name] = new_cls
         return new_cls
             
 class BuiltinCommand(Command):
-    names = []
+    name = ''
+    aliases = []
     __metaclass__ = MetaCommand
     
 

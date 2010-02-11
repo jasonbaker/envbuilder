@@ -8,7 +8,7 @@ class Setup(BuiltinCommand):
     Set up the parcels.  This usually installs the parcel into 
     the virtualenv.
     """
-    names = [ 'setup' ]
+    name = 'setup'
     def run(self, args, config):
         if not args.no_create:
             venv_opts = config['project']['virtualenv-args']
