@@ -1,8 +1,5 @@
 from setuptools import setup, find_packages
 
-<<<<<<< HEAD:setup.py
-from pysistence import make_dict
-
 readme = open('README.rst', 'r')
 
 unsplit_readme_text = readme.read()
