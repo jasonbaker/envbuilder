@@ -230,7 +230,7 @@ Release Notes
 0.3.0a1
 ~~~~~~~~~~~~~~~~~~
 
-  (git master only)
+**(git master only)**
 
  * Added colored output.
  * Added experimental support for custom commands written in Python.
