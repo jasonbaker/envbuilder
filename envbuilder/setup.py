@@ -22,13 +22,8 @@ class Setup(BuiltinCommand):
         for requirement in requirements:
             sh('%s %s %s' % (easy_install, upgrade_flag, requirement))
                 
-        for parcel in config.parcels:
-            build_cmds = parcel['setup']
-            if not isinstance(build_cmds, (list, tuple)):
-                build_cmds = [build_cmds]
-            for build_cmd in build_cmds:
-                sh(build_cmd, cwd=os.path.abspath(parcel['dir']))
-
+        config.run_command('setup')
+        
     def get_arg_parser(self):
         parser = self.get_base_arg_parser()
         parser.add_argument('-n', '--no-create', default=False,
