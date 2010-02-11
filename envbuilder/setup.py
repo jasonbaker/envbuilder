@@ -11,7 +11,8 @@ class Setup(BuiltinCommand):
     names = [ 'setup' ]
     def run(self, args, config):
         if not args.no_create:
-            sh('virtualenv --no-site-packages --clear .')
+            venv_opts = config['project']['virtualenv-args']
+            sh('virtualenv ' + venv_opts)
         if args.upgrade:
             upgrade_flag = '-U'
         else:
