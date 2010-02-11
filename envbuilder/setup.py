@@ -29,15 +29,13 @@ class Setup(BuiltinCommand):
             for build_cmd in build_cmds:
                 sh(build_cmd, cwd=os.path.abspath(parcel['dir']))
 
-    def add_args(self, subparsers):
-        parser = subparsers.add_parser('setup',
-                                       help='Create a virtualenv and '
-                                       'add parcels to it.')
+    def get_arg_parser(self):
+        parser = self.get_base_arg_parser()
         parser.add_argument('-n', '--no-create', default=False,
                             action='store_true',
                             help="Don't (re)create the virtualenv")
         parser.add_argument('-U', '--upgrade', default=False,
                             action='store_true',
                             help='Upgrade requirements listed in the .env file')
-        parser.set_defaults(func=self.run)
+        return parser
 
