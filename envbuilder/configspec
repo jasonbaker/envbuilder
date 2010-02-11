@@ -9,7 +9,6 @@ virtualenv-args = string(default='--no-site-packages --clear .')
        # name is defined in config.py
        dir = string(default='$name')
        url = string()
-       build = string(default='$python setup.py develop')
        checkout=force_list()
        ___many___ = force_list(default=list())
 
