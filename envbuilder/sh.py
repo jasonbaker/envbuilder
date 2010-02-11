@@ -28,6 +28,14 @@ def sh(cmd, cwd='.'):
 def notify(cmd):
     print term.BLUE + '--> ' + cmd + term.NORMAL
 
+def terminate(msg, returncode=1):
+    """
+    Notify the user of an error and end the program.
+    """
+    notify(msg)
+    notify('ABORTED')
+    sys.exit(returncode)
+
 def output_packages(pkg_dict, name):
     """
     Print out a help string from a list of packages returned by

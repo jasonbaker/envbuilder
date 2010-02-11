@@ -22,7 +22,7 @@ class Setup(BuiltinCommand):
         for requirement in requirements:
             sh('%s %s %s' % (easy_install, upgrade_flag, requirement))
                 
-        config.run_command('setup')
+        config.run_command('setup', required=False)
         
     def get_arg_parser(self):
         parser = self.get_base_arg_parser()

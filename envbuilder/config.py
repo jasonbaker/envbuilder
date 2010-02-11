@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, sys
 from os import environ, getcwd
 from os.path import dirname, abspath, join
 
@@ -6,7 +6,7 @@ from configobj import ConfigObj
 from validate import Validator
 from pkg_resources import resource_filename
 
-from envbuilder.sh import sh
+from envbuilder.sh import sh, terminate, notify
 
 configspec = resource_filename(__name__, 'configspec')
 
@@ -38,7 +38,7 @@ class Config(object):
     def get(self, *args, **kwargs):
         return self._config.get(*args, **kwargs)
 
-    def run_command(self, cmd, cwd=None, parcels=None):
+    def run_command(self, cmd, cwd=None, parcels=None, required=True):
         """
         Run a command on all parcels.  The argument cmd specifies the
         config option name of the command, and cwd is the working
@@ -49,7 +49,16 @@ class Config(object):
             parcels = self.parcels
         failed = []
         for parcel in parcels:
-            run_steps = parcel[cmd]
+            try:
+                run_steps = parcel[cmd]
+            except KeyError, e:
+                if required:
+                    msg_template = 'Section "%s" missing required option %s'
+                    terminate(msg_template % (parcel['name'], cmd))
+                else:
+                    notify('Skipping %s' % parcel['name'])
+                    continue
+                
             if not isinstance(run_steps, (tuple, list)):
                 run_steps = [run_steps]
             try:
