@@ -211,10 +211,10 @@ framework around the shell (with a focus around building virtualenvs).
 
 **Does envbuilder have to be used for Python?**
 
-Envbuilder was designed to be flexible enough that it could *theoretically*
-be used with other languages, but this has not yet been tried.  Any saps 
-(aka "open source developers") willing to test this out are encouraged
-to do so!
+Although envbuilder is written primarily for Python development, it can
+work with other languages as well.  There has been some experimentation
+in this area.  There's a `blog post <http://jasonmbaker.com/building-a-common-lisp-webapp-using-pythons-e>`_
+on making envbuilder work with Common Lisp for example.
 
 Support
 ------------------
