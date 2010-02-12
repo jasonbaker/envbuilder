@@ -55,7 +55,8 @@ class _CustomCommand(BuiltinCommand):
                     assert not self._section['required'], msg
                     continue
                 else:
-                    cmd_text_list = self._percent_escape(parcel, default)
+                    cmd_text_list = [self._percent_escape(parcel, cmd)
+                                     for cmd in default]
             cwd = self._section['working_dir']
             cwd = self._percent_escape(parcel, cwd)
             # NOTE:  deprecated
