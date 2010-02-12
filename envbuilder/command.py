@@ -79,14 +79,16 @@ class Command(object):
 class MetaCommand(type):
     def __new__(cls, name, bases, dict):
         new_cls = type.__new__(cls, name, bases, dict)
-        Command._cmd_mapping[new_cls.name] = new_cls
-        for name in new_cls.aliases:
-            Command._cmd_mapping[name] = new_cls
+        if not new_cls.no_use and name != 'BuiltinCommand':
+            Command._cmd_mapping[new_cls.name] = new_cls
+            for name in new_cls.aliases:
+                Command._cmd_mapping[name] = new_cls
         return new_cls
             
 class BuiltinCommand(Command):
     name = ''
     aliases = []
+    no_use = False
     __metaclass__ = MetaCommand
     
 
