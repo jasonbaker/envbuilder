@@ -24,7 +24,6 @@ class Config(object):
             self._config = config
             self.name = name
             self._config['name'] = self.name
-        self._config.interpolation = 'Template'
         self._config['CWD'] = getcwd()
         if hasattr(self._config, 'validate'):
             self._val = Validator()

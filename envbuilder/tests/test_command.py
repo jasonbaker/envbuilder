@@ -5,7 +5,7 @@ from envbuilder.command import BuiltinCommand, Command
 
 def test_lookup_builtin():
     class SomeCommand(BuiltinCommand):
-        names = ['some_command']
+        name = 'some_command'
 
     command = Command.lookup_command('some_command')
     assert command is SomeCommand

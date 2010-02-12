@@ -11,12 +11,15 @@ from envbuilder.util import classproperty
 class WorkingDirPlaceholder(object):
     pass
 
-def make_custom_command(section, name, aliases):
+def make_custom_command(section, cmd_name, cmd_aliases):
     class CommandFromEnv(_CustomCommand):
-        names = [name] + aliases
-        _name = name
+        no_use = False
+        name = cmd_name
+        aliases = cmd_aliases
         _section = section
         __doc__ = section['help']
+
+        __init__ = BuiltinCommand.__init__
 
         @classproperty
         def brief_help(cls):
@@ -28,20 +31,26 @@ class _CustomCommand(BuiltinCommand):
     """
     A custom command defined in the .env file.
     """
+    no_use = True
     _custom_cmd = {}
+    def __init__(self, *args, **kwargs):
+        # The user should *never* see this.  This class wasn't meant to be
+        # instantiated.
+        raise NotImplementedError
+
     @classproperty
     def custom_cmd_mapping(cls):
         return pysistence.make_dict(cls._custom_cmd)
     
     def run(self, args, config):
         for parcel in config.parcels:
-            cmd_text_list = parcel.get(self._name)
+            cmd_text_list = parcel.get(self.name)
             if cmd_text_list is None:
                 default = self._section.get('default')
                 if not default:
                     msg = "Parcel %s doesn't have required option %s" % (
                         parcel.name,
-                        self._name)
+                        self.name)
 
                     assert not self._section['required'], msg
                     continue
@@ -68,8 +77,6 @@ class _CustomCommand(BuiltinCommand):
     def print_help(self):
         print self._section['help']
 
-    # For custom commands, we must give an instance.  Therefore, this is an
-    # instance property.
     @classproperty
-    def brief_help(self):
-        return 'foo'
+    def brief_help(cls):
+        return cls._section['help']
