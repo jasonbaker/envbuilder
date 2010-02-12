@@ -1,6 +1,9 @@
 from envbuilder.sh import sh
+from envbuilder.command import BuiltinCommand
 
-class Update(object):
+class Update(BuiltinCommand):
+    name = 'update'
+    aliases = ['up']
     def run(self, args, config):
         config.run_command('update')
 
