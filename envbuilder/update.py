@@ -2,6 +2,9 @@ from envbuilder.sh import sh
 from envbuilder.command import BuiltinCommand
 
 class Update(BuiltinCommand):
+    """
+    Updates parcels that have already been checked out.
+    """
     name = 'update'
     aliases = ['up']
     def run(self, args, config):
