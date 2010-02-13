@@ -1,4 +1,4 @@
-import subprocess, sys
+import subprocess, sys, shlex
 import textwrap
 
 from envbuilder.terminal import TerminalController
@@ -12,8 +12,7 @@ def sh(cmd, cwd='.'):
     notify(cmd)
     if cwd != '.':
         print '(From: %s)' % cwd
-    # Eliminate empties
-    cmd_list = [x for x in cmd.split() if x]
+    cmd_list = shlex.split(cmd)
     try:
         # So we can pass in an empty string to do nothing
         if cmd:
