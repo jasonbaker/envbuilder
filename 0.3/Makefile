@@ -116,3 +116,9 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
+
+create: html
+	rm -rf ./_sources/
+	rm -rf ./_static
+	mv _build/html/* .
+	git add ./*.html
