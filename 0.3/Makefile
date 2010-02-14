@@ -122,3 +122,5 @@ create: html
 	rm -rf ./_static
 	mv _build/html/* .
 	git add ./*.html
+	git add ./*.css
+	git add ./*.js
