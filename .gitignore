@@ -1,0 +1,15 @@
+*~
+*.pyc
+.coverage
+*.egg
+*.egg-info
+dist
+env
+build
+lib
+bin
+include
+.ropeproject
+*#*
+pip-log.txt
+.Python
