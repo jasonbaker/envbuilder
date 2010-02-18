@@ -1,0 +1,154 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Command &mdash; envbuilder v0.3 documentation</title>
+    <link rel="stylesheet" href="static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.3',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="envbuilder v0.3 documentation" href="index.html" />
+    <link rel="prev" title="Developer documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <h1><a href="index.html">envbuilder v0.3 documentation</a></h1>
+        <div class="rel">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a> |
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |
+          <a href="index.html" title="Developer documentation"
+             accesskey="P">previous</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-envbuilder.command">
+<h1>Command<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="envbuilder.command.Command">
+<em class="property">class </em><tt class="descclassname">envbuilder.command.</tt><tt class="descname">Command</tt><a class="headerlink" href="#envbuilder.command.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>An abstract base class for commands.</p>
+<dl class="method">
+<dt id="envbuilder.command.Command.get_arg_parser">
+<tt class="descname">get_arg_parser</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.get_arg_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be overridden in subclasses.  Returns an
+<tt class="xref docutils literal"><span class="pre">argparse.ArgumentParser</span></tt>.  By default, this
+returns the same as
+<a title="envbuilder.command.Command.get_base_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_base_arg_parser"><tt class="xref docutils literal"><span class="pre">get_base_arg_parser()</span></tt></a>.</p>
+<p>In general, this method should get its parser from
+<a title="envbuilder.command.Command.get_base_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_base_arg_parser"><tt class="xref docutils literal"><span class="pre">get_base_arg_parser()</span></tt></a>.
+Otherwise, some command-line options might not work.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.get_base_arg_parser">
+<tt class="descname">get_base_arg_parser</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.get_base_arg_parser" title="Permalink to this definition">¶</a></dt>
+<dd>This returns the argument parser with the base functionality.
+This should not be overridden in subclasses unless you know
+what you are doing.</dd></dl>
+
+<dl class="classmethod">
+<dt id="envbuilder.command.Command.lookup_command">
+<em class="property">classmethod </em><tt class="descname">lookup_command</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.lookup_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>This looks up a command by looking in two places:</p>
+<blockquote>
+<ul class="simple">
+<li>The builtin command set</li>
+<li>sys.modules</li>
+</ul>
+</blockquote>
+<p>So for instance, &#8216;setup&#8217; would return the built in setup command,
+while &#8216;py.something&#8217; would produce an import statement equivalent
+to &#8216;from py import something&#8217;.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.print_help">
+<tt class="descname">print_help</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.print_help" title="Permalink to this definition">¶</a></dt>
+<dd>Print out the full help message.  By default, this calls
+the print_help method on the parser returned by
+<a title="envbuilder.command.Command.get_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_arg_parser"><tt class="xref docutils literal"><span class="pre">get_arg_parser()</span></tt></a>.</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Contents</h3>
+          <ul class="current">
+<li class="toctree-l1 current"><a class="current reference external" href="">Command</a></li>
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="genindex.html" title="General Index"
+             >index</a> |
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |
+          <a href="index.html" title="Developer documentation"
+             >previous</a>
+            <br/>
+            <a href="sources/command.txt"
+               rel="nofollow">Show Source</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2010, Jason Baker.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>
