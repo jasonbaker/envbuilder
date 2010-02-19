@@ -8,7 +8,7 @@ class Update(BuiltinCommand):
     name = 'update'
     aliases = ['up']
     def run(self, args, config):
-        config.run_command('update')
+        config.run_command('update', required=False)
 
     def add_args(self, subparsers):
         parser = subparsers.add_parser('update',
