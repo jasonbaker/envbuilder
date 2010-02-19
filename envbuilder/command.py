@@ -12,6 +12,9 @@ class Command(object):
 
     @classproperty
     def builtin_cmd_mapping(cls):
+        """
+        A mapping of the built-in commands.
+        """
         return pysistence.make_dict(cls._cmd_mapping)
 
     @classmethod
@@ -51,10 +54,20 @@ class Command(object):
                 sys.exit(1)
 
     def print_help(self):
+        """
+        Print out the full help message.  By default, this calls
+        the print_help method on the parser returned by
+        :meth:`~envbuilder.command.Command.get_arg_parser`.
+        """
         parser = self.get_arg_parser()
         parser.print_help()
 
     def get_base_arg_parser(self):
+        """
+        This returns the argument parser with the base functionality.
+        This should not be overridden in subclasses unless you know
+        what you are doing.
+        """
         parser = argparse.ArgumentParser(prog='envb %s' % self.name,
                                          fromfile_prefix_chars='@')
         parser.add_argument('-p', '--parcels',
@@ -64,7 +77,13 @@ class Command(object):
     def get_arg_parser(self):
         """
         Method to be overridden in subclasses.  Returns an
-        argparse.ArgumentParser.
+        :class:`argparse.ArgumentParser`.  By default, this
+        returns the same as
+        :meth:`~envbuilder.command.Command.get_base_arg_parser`.
+
+        In general, this method should get its parser from
+        :meth:`~envbuilder.command.Command.get_base_arg_parser`.
+        Otherwise, some command-line options might not work.
         """
         return self.get_base_arg_parser()
 
