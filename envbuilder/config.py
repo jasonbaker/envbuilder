@@ -1,8 +1,8 @@
-import subprocess, sys
+import subprocess, sys, copy
 from os import environ, getcwd
 from os.path import dirname, abspath, join
 
-from configobj import ConfigObj
+from configobj import ConfigObj, Section
 from validate import Validator
 from pkg_resources import resource_filename
 
@@ -15,21 +15,62 @@ class Config(object):
     _val = None
     def __init__(self, filepath=None, config=None, name=None, args=None):
         assert (filepath or config), "Either filepath or config must be specified!"
+        self.args = args
+
         if not config:
-            self._config = ConfigObj(filepath, unrepr=True,
-                                     interpolation='Template',
-                                     configspec=configspec)
-            self._config.update(environ)
+            self._config = self.assemble_configobj(filepath)
         else:
             self._config = config
             self.name = name
             self._config['name'] = self.name
+
         self._config['CWD'] = getcwd()
+
+
+
+
         if hasattr(self._config, 'validate'):
             self._val = Validator()
             self._config.validate(self._val)
 
-        self.args = args
+
+
+    def assemble_configobj(self, filepath):
+        non_interpolating_config = self.new_configobj(filepath,
+                                                      configspec=configspec,
+                                                      unrepr=True)
+        config = self.new_configobj(filepath,
+                                    unrepr=True,
+                                    interpolation='Template',
+                                    configspec=configspec)
+        others = non_interpolating_config['also']
+        if not isinstance(others, (list, tuple)):
+            others = [others]
+        for other_path in others:
+            other_cfg = self.new_configobj(other_path,
+                                           unrepr=True,
+                                           interpolation='Template',
+                                           configspec=configspec)
+            config.merge(other_cfg)
+        return config
+
+    def new_configobj(self, *args, **kwargs):
+        config = ConfigObj(*args, **kwargs)
+        config['CWD'] = getcwd()
+        environ_dict = copy.copy(environ)
+        for key, value in environ_dict.iteritems():
+            if isinstance(value, str):
+                environ_dict[key] = value.replace('$', '$$')
+        config.update(environ_dict)
+        config.walk(self.name_parcels, call_on_sections=True)
+        return config
+        
+
+    def name_parcels(self, section, key):
+        val = section[key]
+        if not isinstance(val, Section):
+            return
+        val['name'] = key
 
     def __getitem__(self, name):
         return self._config[name]
@@ -102,3 +143,4 @@ class Config(object):
                 yield Config(config=project[parcel_name], name=parcel_name)
 
 
+    
