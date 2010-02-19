@@ -1,4 +1,4 @@
-import subprocess, sys
+import subprocess, sys, shlex
 import textwrap
 
 from envbuilder.terminal import TerminalController
@@ -11,22 +11,31 @@ def sh(cmd, cwd='.'):
     """
     notify(cmd)
     if cwd != '.':
-        print '(From: %s)' % cwd
-    # Eliminate empties
-    cmd_list = [x for x in cmd.split() if x]
+        notify('(From: %s)' % cwd, level=1)
     try:
         # So we can pass in an empty string to do nothing
         if cmd:
-            subprocess.check_call(cmd_list, cwd=cwd)
+            subprocess.check_call(args=cmd, cwd=cwd, shell=True)
     except subprocess.CalledProcessError, e:
-        cmd = ' '.join(e.cmd)
+        cmd = e.cmd
         returncode = e.returncode
         notify('"%s" returned code %s' % (cmd, returncode))
         notify('ABORTED')
         sys.exit(returncode)
 
-def notify(cmd):
-    print term.BLUE + '--> ' + cmd + term.NORMAL
+def notify(cmd, level=0):
+    prompt = _generate_prompt(level)
+    print term.BLUE + prompt  + cmd + term.NORMAL
+
+def _generate_prompt(level):
+    if level == 0:
+        return '> '
+    else:
+        prompt = '> '
+        for i in xrange(level):
+            prompt = '-' + prompt
+        return prompt
+    
 
 def terminate(msg, returncode=1):
     """
