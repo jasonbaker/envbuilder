@@ -10,7 +10,7 @@ virtualenv-args = string(default='--no-site-packages --clear .')
     [[__many__]]
        # name is defined in config.py
        dir = string(default='$name')
-       url = string()
+       url = string(default='')
        checkout=force_list()
        ___many___ = force_list(default=list())
 
