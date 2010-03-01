@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import envbuilder
 
 readme = open('README.rst', 'r')
 
@@ -12,10 +13,10 @@ setup(
     name='envbuilder',
     author='Jason Baker',
     author_email='amnorvend@gmail.com',
-    version='0.3.0.a1',
+    version=envbuilder.__version__,
     packages=find_packages(),
     setup_requires=['nose'],
-    install_requires=['ConfigObj>=4.7.0', 'argparse', 'pip', 'virtualenv',
+    install_requires=['ConfigObj>=4.7.0', 'argparse>=1.1', 'pip', 'virtualenv',
                       'pysistence'],
     tests_require=['nose', 'coverage'],
     test_suite = 'nose.collector',
