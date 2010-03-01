@@ -1,8 +1,8 @@
-import subprocess, sys, copy
+import subprocess, sys, copy, traceback
 from os import environ, getcwd
 from os.path import dirname, abspath, join
 
-from configobj import ConfigObj, Section
+from configobj import ConfigObj, Section, MissingInterpolationOption
 from validate import Validator
 from pkg_resources import resource_filename
 
@@ -14,6 +14,7 @@ class Config(object):
     _config = None
     _val = None
     def __init__(self, filepath=None, config=None, name=None, args=None):
+        self.filepath = filepath
         assert (filepath or config), "Either filepath or config must be specified!"
         self.args = args
 
@@ -25,10 +26,6 @@ class Config(object):
             self._config['name'] = self.name
 
         self._config['CWD'] = getcwd()
-
-
-
-
         if hasattr(self._config, 'validate'):
             self._val = Validator()
             self._config.validate(self._val)
@@ -43,7 +40,7 @@ class Config(object):
                                     unrepr=True,
                                     interpolation='Template',
                                     configspec=configspec)
-        others = non_interpolating_config['also']
+        others = non_interpolating_config.get('also', [])
         if not isinstance(others, (list, tuple)):
             others = [others]
         for other_path in others:
@@ -51,8 +48,22 @@ class Config(object):
                                            unrepr=True,
                                            interpolation='Template',
                                            configspec=configspec)
-            config.merge(other_cfg)
+            try:
+                config.merge(other_cfg)
+            except MissingInterpolationOption, e:
+                self._handle_missing_interp(e, other_path)
         return config
+
+    def _handle_missing_interp(self, e, path=None):
+        if self.args and self.args.verbose:
+            traceback.print_exc()
+        else:
+            notify(str(e))
+        if path:
+            terminate('While merging file %s' % path)
+        else:
+            terminate('File unknown')
+
 
     def new_configobj(self, *args, **kwargs):
         config = ConfigObj(*args, **kwargs)
@@ -67,13 +78,18 @@ class Config(object):
         
 
     def name_parcels(self, section, key):
-        val = section[key]
+        # Bypass interpolation.  ConfigObj 4.8.0 should include
+        # functionality to make this a bit more clear.
+        val = dict.__getitem__(section, key)
         if not isinstance(val, Section):
             return
         val['name'] = key
 
     def __getitem__(self, name):
-        return self._config[name]
+        try:
+            return self._config[name]
+        except MissingInterpolationOption, e:
+            self._handle_missing_interp(e, self.filepath)
 
     def get(self, *args, **kwargs):
         return self._config.get(*args, **kwargs)
@@ -140,7 +156,8 @@ class Config(object):
             parcel_names = [parcel_names]
         for parcel_name in parcel_names:
             if parcel_name.upper() != 'DEFAULT':
-                yield Config(config=project[parcel_name], name=parcel_name)
+                yield Config(config=project[parcel_name], name=parcel_name,
+                             args=self.args)
 
 
     
