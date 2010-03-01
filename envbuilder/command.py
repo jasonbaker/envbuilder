@@ -72,6 +72,9 @@ class Command(object):
                                          fromfile_prefix_chars='@')
         parser.add_argument('-p', '--parcels',
                             help = 'Select parcels to run this command on.')
+        parser.add_argument('-v', '--verbose',
+                            default=True,
+                            help='Print verbose errors.')
         return parser
 
     def get_arg_parser(self):
