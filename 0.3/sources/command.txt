@@ -42,7 +42,7 @@ The important part is the "hello.hello".  This is the name that Python uses
 once a module has been imported.  Envbuilder will allow the same syntax.
 Thus, to call the hello command, you would do the following:
 
-.. code-block:: sh
+.. code-block:: bash
 
     envb hello.hello
 
