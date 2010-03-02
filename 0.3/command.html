@@ -48,8 +48,37 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-envbuilder.command">
-<h1>Command<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="command">
+<h1>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="writing-your-own-envbuilder-commands-in-python">
+<h2>Writing your own envbuilder commands in Python<a class="headerlink" href="#writing-your-own-envbuilder-commands-in-python" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hello-world">
+<h3>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h3>
+<p>Here is the command to write a hello world command using envbuilder:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">envbuilder.command</span> <span class="kn">import</span> <span class="n">Command</span>
+<span class="kn">from</span> <span class="nn">envbuilder.sh</span> <span class="kn">import</span> <span class="n">notify</span>
+
+<span class="k">class</span> <span class="nc">hello</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print hello world.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;hello&#39;</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">notify</span><span class="p">(</span><span class="s">&#39;Hello, world!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This command is actually stored in the <a class="reference external" href="http://github.com/jasonbaker/envb-site-commands">envb-site-commands</a>
+package.  To try it out, you simply need to use the following .env file:</p>
+<div class="highlight-python"><pre>[project]
+parcels = 'site-commands'
+
+    [[site-commands]]
+    checkout = 'git clone git@github.com:jasonbaker/envb-site-commands.git'</pre>
+</div>
+</div>
+</div>
+<div class="section" id="module-envbuilder.command">
+<h2>Reference<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="envbuilder.command.Command">
 <em class="property">class </em><tt class="descclassname">envbuilder.command.</tt><tt class="descname">Command</tt><a class="headerlink" href="#envbuilder.command.Command" title="Permalink to this definition">¶</a></dt>
@@ -98,6 +127,7 @@ the print_help method on the parser returned by
 </dd></dl>
 
 </div>
+</div>
 
 
           </div>
@@ -107,7 +137,11 @@ the print_help method on the parser returned by
         <div class="sidebar">
           <h3>Contents</h3>
           <ul class="current">
-<li class="toctree-l1 current"><a class="current reference external" href="">Command</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">Command</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#writing-your-own-envbuilder-commands-in-python">Writing your own envbuilder commands in Python</a></li>
+<li class="toctree-l2"><a class="reference external" href="#module-envbuilder.command">Reference</a></li>
+</ul>
+</li>
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>

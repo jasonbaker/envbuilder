@@ -3,7 +3,7 @@
 # Version: 0.3
 envbuilder.command mod command.html
 envbuilder.command.Command.print_help method command.html
-envbuilder.command.Command class command.html
-envbuilder.command.Command.get_base_arg_parser method command.html
 envbuilder.command.Command.get_arg_parser method command.html
+envbuilder.command.Command.get_base_arg_parser method command.html
+envbuilder.command.Command class command.html
 envbuilder.command.Command.lookup_command classmethod command.html
