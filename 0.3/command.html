@@ -69,12 +69,28 @@
 </div>
 <p>This command is actually stored in the <a class="reference external" href="http://github.com/jasonbaker/envb-site-commands">envb-site-commands</a>
 package.  To try it out, you simply need to use the following .env file:</p>
-<div class="highlight-python"><pre>[project]
-parcels = 'site-commands'
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[project]</span>
+<span class="na">parcels</span> <span class="o">=</span> <span class="s">&#39;site-commands&#39;</span>
 
-    [[site-commands]]
-    checkout = 'git clone git@github.com:jasonbaker/envb-site-commands.git'</pre>
+    <span class="k">[[site-commands]]</span>
+    <span class="na">checkout</span> <span class="o">=</span> <span class="s">&#39;git clone git@github.com:jasonbaker/envb-site-commands.git&#39;</span>
+</pre></div>
 </div>
+<p>To access non-builtin commands, envbuilder uses a dot notation.  The hello
+command in site-commands is stored in hello.py.  If we wanted to use this
+in Python code, we would do something like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">hello</span>
+<span class="n">hello_cmd</span> <span class="o">=</span> <span class="n">hello</span><span class="o">.</span><span class="n">hello</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The important part is the &#8220;hello.hello&#8221;.  This is the name that Python uses
+once a module has been imported.  Envbuilder will allow the same syntax.
+Thus, to call the hello command, you would do the following:</p>
+<div class="highlight-sh"><div class="highlight"><pre>envb hello.hello
+</pre></div>
+</div>
+<p>You are even provided a basic help command (though it only shows the default
+arguments that envbuilder takes).</p>
 </div>
 </div>
 <div class="section" id="module-envbuilder.command">
