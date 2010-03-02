@@ -227,6 +227,11 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 Release Notes
 ------------------
 
+0.2.2
+~~~~~~~~~~~~~~~~~~
+
+* Requiring configobj 4.7.2 as it fixes some important bugs.
+
 0.2.1
 ~~~~~~~~~~~~~~~~~~
 
