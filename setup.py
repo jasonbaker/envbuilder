@@ -15,7 +15,7 @@ setup(
     version='0.3.0.a1',
     packages=find_packages(),
     setup_requires=['nose'],
-    install_requires=['ConfigObj>=4.7.0', 'argparse', 'pip', 'virtualenv',
+    install_requires=['ConfigObj>=4.7.2', 'argparse', 'pip', 'virtualenv',
                       'pysistence'],
     tests_require=['nose', 'coverage'],
     test_suite = 'nose.collector',

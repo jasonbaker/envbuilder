@@ -239,6 +239,12 @@ Release Notes
  * Added a lisp webapp example.
  * Revamped the command-running infrastructure.
 
+
+0.2.2
+~~~~~~~~~~~~~~~~~~
+
+* Requiring configobj 4.7.2 as it fixes some important bugs.
+
 0.2.1
 ~~~~~~~~~~~~~~~~~~
 
