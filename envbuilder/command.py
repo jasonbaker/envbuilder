@@ -2,6 +2,7 @@ import sys, textwrap
 
 import argparse, pysistence
 
+import envbuilder
 from envbuilder.util import classproperty
 
 class Command(object):
@@ -29,6 +30,9 @@ class Command(object):
         while 'py.something' would produce an import statement equivalent
         to 'from py import something'.
         """
+        if not name:
+            name = 'help'
+        
         if name in cls._cmd_mapping:
             return cls._cmd_mapping[name]
         else:
@@ -75,6 +79,8 @@ class Command(object):
         parser.add_argument('-v', '--verbose',
                             default=True,
                             help='Print verbose errors.')
+        parser.add_argument('--version', action='version',
+                            version=envbuilder.__version__)
         return parser
 
     def get_arg_parser(self):
