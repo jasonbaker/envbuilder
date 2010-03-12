@@ -2,9 +2,12 @@ import subprocess, sys, copy, traceback
 from os import environ, getcwd
 from os.path import dirname, abspath, join
 
-from configobj import ConfigObj, Section, MissingInterpolationOption
+try:
+    from configobj import ConfigObj, Section, MissingInterpolationOption
+except ImportError:
+    pass
 from validate import Validator
-from pkg_resources import resource_filename
+from pkg_resources import resource_filename, require
 
 from envbuilder.sh import sh, terminate, notify
 
@@ -14,6 +17,9 @@ class Config(object):
     _config = None
     _val = None
     def __init__(self, filepath=None, config=None, name=None, args=None):
+        # We don't want to ensure that configobj is loaded until we
+        # actually want to use it
+        require('configobj')
         self.filepath = filepath
         assert (filepath or config), "Either filepath or config must be specified!"
         self.args = args
