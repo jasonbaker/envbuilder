@@ -26,8 +26,8 @@ class Help(BuiltinCommand):
         sys.exit(0)
 
     def print_main_help(self):
-        print 'usage: envb [command]\n'
-        
+        args = Arguments()
+        args.print_help()
         output_packages(Command.builtin_cmd_mapping, 'Common commands')
         
         print '\nFor more info type "envb help <command>"'

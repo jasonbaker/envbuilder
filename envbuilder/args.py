@@ -14,7 +14,7 @@ class Arguments(object):
         self.args = args
         self.parser = argparse.ArgumentParser()
         self.parser.add_argument('command', default='help',
-                                 help='The command to run',
+                                 help='The command to run (see below for common commands)',
                                  nargs='?',)
         self.parser.add_argument('--version', action='version',
                             version=envbuilder.__version__,
@@ -22,3 +22,7 @@ class Arguments(object):
         options, remaining = self.parser.parse_known_args(self.args)
         self.command = options.command
         self.arguments = remaining
+
+    def print_help(self):
+        self.parser.print_help()
+        print '\n'
