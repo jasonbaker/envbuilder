@@ -1,7 +1,7 @@
 import sys
 
 import envbuilder
-from envbuilder.command import BuiltinCommand, Command, get_command
+from envbuilder.command import BuiltinCommand, Command
 
 def test_lookup_builtin():
     class SomeCommand(BuiltinCommand):
@@ -31,8 +31,3 @@ def test_import_dot_qualified():
         assert command is MyCommand2
     finally:
         del envbuilder.my_command2
-
-def test_get_command():
-    command, others = get_command(['help', '--foo'])
-    assert command == 'help'
-    assert others == ['--foo']
