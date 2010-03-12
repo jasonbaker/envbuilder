@@ -4,9 +4,10 @@ from os.path import dirname, abspath, join
 
 try:
     from configobj import ConfigObj, Section, MissingInterpolationOption
+    from validate import Validator
 except ImportError:
     pass
-from validate import Validator
+
 from pkg_resources import resource_filename, require
 
 from envbuilder.sh import sh, terminate, notify
