@@ -33,6 +33,8 @@ commands::
     # if you plan on making changes to envbuilder, use this command:
     python setup.py develop
 
+Alternatively, you can download the current `tarball from master <http://github.com/jasonbaker/envbuilder/tarball/master#egg=envbuilder-dev>`_.
+
 If you would like to install from pypi, you should use `pip <http://pypi.python.org/pypi/pip/0.6.1>`_::
 
     pip install envbuilder
