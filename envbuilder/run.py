@@ -5,6 +5,7 @@ from envbuilder.config import Config
 from envbuilder.command import Command
 from envbuilder.custom import make_custom_command
 from envbuilder.args import Arguments
+from envbuilder.sh import notify
 
 def main():
     cwd = os.path.abspath(os.path.curdir)
@@ -35,3 +36,7 @@ def main():
 def handle_command_path(config):
     for path in config['project']['command-path']:
         sys.path.append(path)
+    try:
+        import builtins
+    except ImportError, i:
+        notify('WARNING:  unable to find builtin commands')
