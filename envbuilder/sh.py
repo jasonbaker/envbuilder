@@ -1,9 +1,11 @@
-import subprocess, sys, shlex
+import subprocess, sys, shlex, os
 import textwrap
 
 from envbuilder.terminal import TerminalController
 
 term = TerminalController()
+
+BINDIR = os.path.join(os.getcwd(), 'bin')
 
 def sh(cmd, cwd='.'):
     """
@@ -15,6 +17,7 @@ def sh(cmd, cwd='.'):
     try:
         # So we can pass in an empty string to do nothing
         if cmd:
+            cmd = cmd.format(BINDIR=BINDIR)
             subprocess.check_call(args=cmd, cwd=cwd, shell=True)
     except subprocess.CalledProcessError, e:
         cmd = e.cmd
