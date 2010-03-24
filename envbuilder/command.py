@@ -104,6 +104,13 @@ class Command(object):
     def brief_help(cls):
         return cls.__doc__
 
+    def run(self, args, config):
+        """
+        Stub class to be overridden in subclasses.  This is
+        where the actual logic of the command should go.
+        """
+        raise NotImplementedError
+
 class MetaCommand(type):
     def __new__(cls, name, bases, dict):
         new_cls = type.__new__(cls, name, bases, dict)
