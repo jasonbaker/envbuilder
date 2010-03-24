@@ -63,6 +63,7 @@ class Command(object):
         the print_help method on the parser returned by
         :meth:`~envbuilder.command.Command.get_arg_parser`.
         """
+        print self.brief_help
         parser = self.get_arg_parser()
         parser.print_help()
 
