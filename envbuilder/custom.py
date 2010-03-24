@@ -57,6 +57,8 @@ class _CustomCommand(BuiltinCommand):
                 else:
                     cmd_text_list = [self._percent_escape(parcel, cmd)
                                      for cmd in default]
+            elif not isinstance(cmd_text_list, list):
+                cmd_text_list = [cmd_text_list]
             cwd = self._section['working_dir']
             cwd = self._percent_escape(parcel, cwd)
             # NOTE:  deprecated
