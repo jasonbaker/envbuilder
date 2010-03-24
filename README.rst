@@ -194,7 +194,9 @@ A command has the following options:
 
 Note that you may also access a parcel's options by prefixing the name with
 a ``%`` instead of a ``$``.  In the above example, ``%dir`` is replaced
-with the dir option of the parcel.
+with the dir option of the parcel.  One thing to note is that percent variables
+don't use the normal interpolation path.  Thus, the percent variable must be
+defined within the parcel itself, not the DEFAULT section.
 
 Questions
 ------------------
