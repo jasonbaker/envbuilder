@@ -11,13 +11,13 @@ def sh(cmd, cwd='.'):
     """
     A somewhat easier interface to subprocess.check_call.
     """
+    cmd = cmd.format(BINDIR=BINDIR)
     notify(cmd)
     if cwd != '.':
         notify('(From: %s)' % cwd, level=1)
     try:
         # So we can pass in an empty string to do nothing
         if cmd:
-            cmd = cmd.format(BINDIR=BINDIR)
             subprocess.check_call(args=cmd, cwd=cwd, shell=True)
     except subprocess.CalledProcessError, e:
         cmd = e.cmd
