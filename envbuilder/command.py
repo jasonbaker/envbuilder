@@ -120,21 +120,29 @@ class Command(object):
         raise NotImplementedError
 
     def main(self, args, config):
+        """
+        This is the function to call to run a command.  This
+        does handling of various tasks such as installing
+        dependencies.
+        """
         if not args.no_deps:
             self.handle_dependencies(args)
         self.run(args, config)
 
     def handle_dependencies(self, args):
+        """
+        Install any python dependencies that are not findable by
+        pkg_resources.require.
+        """
         for dependency in self.py_dependencies:
             try:
                 pkg_resources.require(dependency)
-            except (pkg_resources.DistributionNotFound,
-                   pkg_resources.VersionConflict):
+            except pkg_resources.DistributionNotFound:
                 notify('Installing %s' % dependency)
-                if args.upgrade:
-                    sh("pip install -U '%s'" % dependency)
-                else:
-                    sh("pip install '%s'" % dependency)
+                sh("pip install '%s'" % dependency)
+            except pkg_resources.VersionConflict:
+                notify('Upgrading %s' % dependency)
+                sh("pip install -U '%s'" % dependency)
 
 class MetaCommand(type):
     def __new__(cls, name, bases, dict):
