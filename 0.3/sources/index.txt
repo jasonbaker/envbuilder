@@ -6,7 +6,7 @@ This is still very much a work in progress!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    command
    sh

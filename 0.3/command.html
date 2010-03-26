@@ -90,10 +90,37 @@ in Python code, we would do something like the following:</p>
 once a module has been imported.  Envbuilder will allow the same syntax.
 Thus, to call the hello command, you would do the following:</p>
 <div class="highlight-bash"><div class="highlight"><pre>envb hello.hello
+&gt; Hello, world!
 </pre></div>
 </div>
 <p>You are even provided a basic help command (though it only shows the default
 arguments that envbuilder takes).</p>
+</div>
+<div class="section" id="using-a-shell-command">
+<h3>Using a shell command<a class="headerlink" href="#using-a-shell-command" title="Permalink to this headline">¶</a></h3>
+<p>Envbuilder will allow you to run any arbitrary shell command easily.  Let&#8217;s
+modify the hello command to echo hello from the shell instead of using the
+notify function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">envbuilder.command</span> <span class="kn">import</span> <span class="n">Command</span>
+<span class="kn">from</span> <span class="nn">envbuilder.sh</span> <span class="kn">import</span> <span class="n">sh</span>
+
+<span class="k">class</span> <span class="nc">hellosh</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print hello world.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;hello&#39;</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">sh</span><span class="p">(</span><span class="s">&quot;echo &#39;Hello, world!&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we run this, we get the following output:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.hellosh
+&gt; <span class="nb">echo</span> <span class="s1">&#39;Hello, world!&#39;</span>
+-&gt; <span class="o">(</span>From: /home/jason/src/interface_dev<span class="o">)</span>
+Hello, world!
+</pre></div>
+</div>
+<p>That was easy, wasn&#8217;t it?</p>
 </div>
 </div>
 <div class="section" id="module-envbuilder.command">
