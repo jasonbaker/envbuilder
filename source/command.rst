@@ -55,7 +55,7 @@ Using a shell command
 
 Envbuilder will allow you to run any arbitrary shell command easily.  Let's
 modify the hello command to echo hello from the shell instead of using the
-notify function:
+notify function.  This depends on the :func:`~envbuilder.sh.sh` function.
 
 .. code-block:: python
 
