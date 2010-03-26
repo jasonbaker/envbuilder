@@ -1,16 +1,17 @@
 import sys, textwrap
 
-import argparse, pysistence
+import argparse, pysistence, pkg_resources
 
 import envbuilder
 from envbuilder.util import classproperty
+from envbuilder.sh import sh, notify
 
 class Command(object):
     """
     An abstract base class for commands.
     """
     _cmd_mapping = {}
-
+    py_dependencies=[]
     @classproperty
     def builtin_cmd_mapping(cls):
         """
@@ -82,6 +83,12 @@ class Command(object):
                             help='Print verbose errors.')
         parser.add_argument('--version', action='version',
                             version=envbuilder.__version__)
+        parser.add_argument('-N', '--no-deps',
+                            default=False, action='store_true',
+                            help="Don't automatically install a command's dependencies")
+        parser.add_argument('-U', '--upgrade',
+                            default=False, action='store_true',
+                            help="Update dependencies")
         return parser
 
     def get_arg_parser(self):
@@ -111,6 +118,23 @@ class Command(object):
         where the actual logic of the command should go.
         """
         raise NotImplementedError
+
+    def main(self, args, config):
+        if not args.no_deps:
+            self.handle_dependencies(args)
+        self.run(args, config)
+
+    def handle_dependencies(self, args):
+        for dependency in self.py_dependencies:
+            try:
+                pkg_resources.require(dependency)
+            except (pkg_resources.DistributionNotFound,
+                   pkg_resources.VersionConflict):
+                notify('Installing %s' % dependency)
+                if args.upgrade:
+                    sh("pip install -U '%s'" % dependency)
+                else:
+                    sh("pip install '%s'" % dependency)
 
 class MetaCommand(type):
     def __new__(cls, name, bases, dict):
