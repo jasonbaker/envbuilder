@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Global Module Index &mdash; envbuilder v0.3 documentation</title>
+    <title>sh - shell commands &mdash; envbuilder v0.3 documentation</title>
     <link rel="stylesheet" href="static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,9 +23,8 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="envbuilder v0.3 documentation" href="index.html" />
- 
-
-
+    <link rel="next" title="util" href="util.html" />
+    <link rel="prev" title="command" href="command.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -34,8 +33,12 @@
         <div class="rel">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a> |
-          <a href="#" title="Global Module Index"
-             accesskey="M">modules</a>
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |
+          <a href="util.html" title="util"
+             accesskey="N">next</a> |
+          <a href="command.html" title="command"
+             accesskey="P">previous</a>
         </div>
        </div>
     </div>
@@ -48,33 +51,25 @@
         <div class="bodywrapper">
           <div class="body">
             
+  <div class="section" id="module-envbuilder.sh">
+<h1>sh - shell commands<a class="headerlink" href="#module-envbuilder.sh" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="envbuilder.sh.output_packages">
+<tt class="descclassname">envbuilder.sh.</tt><tt class="descname">output_packages</tt><big>(</big><em>pkg_dict</em>, <em>name</em><big>)</big><a class="headerlink" href="#envbuilder.sh.output_packages" title="Permalink to this definition">¶</a></dt>
+<dd>Print out a help string from a list of packages returned by
+Command.builtin_cmd_mapping.</dd></dl>
 
-   <h1 id="global-module-index">Global Module Index</h1>
+<dl class="function">
+<dt id="envbuilder.sh.sh">
+<tt class="descclassname">envbuilder.sh.</tt><tt class="descname">sh</tt><big>(</big><em>cmd</em>, <em>cwd='.'</em><big>)</big><a class="headerlink" href="#envbuilder.sh.sh" title="Permalink to this definition">¶</a></dt>
+<dd>A somewhat easier interface to subprocess.check_call.</dd></dl>
 
-   <div class="modindex-jumpbox">
-   <a href="#cap-E"><strong>E</strong></a> 
-   </div>
+<dl class="function">
+<dt id="envbuilder.sh.terminate">
+<tt class="descclassname">envbuilder.sh.</tt><tt class="descname">terminate</tt><big>(</big><em>msg</em>, <em>returncode=1</em><big>)</big><a class="headerlink" href="#envbuilder.sh.terminate" title="Permalink to this definition">¶</a></dt>
+<dd>Notify the user of an error and end the program.</dd></dl>
 
-   <table class="indextable modindextable" cellspacing="0" cellpadding="2"><tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-   <tr class="cap"><td></td><td><a name="cap-E"><strong>E</strong></a></td><td></td></tr><tr>
-     <td><img src="static/minus.png" id="toggle-1"
-            class="toggler" style="display: none" alt="-" /></td>
-     <td>
-     <tt class="xref">envbuilder</tt></td><td>
-     <em></em></td></tr><tr class="cg-1">
-     <td></td>
-     <td>&nbsp;&nbsp;&nbsp;
-     <a href="command.html#module-envbuilder.command"><tt class="xref">envbuilder.command</tt></a></td><td>
-     <em></em></td></tr><tr class="cg-1">
-     <td></td>
-     <td>&nbsp;&nbsp;&nbsp;
-     <a href="sh.html#module-envbuilder.sh"><tt class="xref">envbuilder.sh</tt></a></td><td>
-     <em></em></td></tr><tr class="cg-1">
-     <td></td>
-     <td>&nbsp;&nbsp;&nbsp;
-     <a href="util.html#module-envbuilder.util"><tt class="xref">envbuilder.util</tt></a></td><td>
-     <em></em></td></tr>
-   </table>
+</div>
 
 
           </div>
@@ -83,9 +78,9 @@
         </div>
         <div class="sidebar">
           <h3>Contents</h3>
-          <ul>
+          <ul class="current">
 <li class="toctree-l1"><a class="reference external" href="command.html">command</a></li>
-<li class="toctree-l1"><a class="reference external" href="sh.html">sh - shell commands</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">sh - shell commands</a></li>
 <li class="toctree-l1"><a class="reference external" href="util.html">util</a></li>
 </ul>
 
@@ -109,8 +104,15 @@
         <div class="left">
           <a href="genindex.html" title="General Index"
              >index</a> |
-          <a href="#" title="Global Module Index"
-             >modules</a>
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |
+          <a href="util.html" title="util"
+             >next</a> |
+          <a href="command.html" title="command"
+             >previous</a>
+            <br/>
+            <a href="sources/sh.txt"
+               rel="nofollow">Show Source</a>
         </div>
 
         <div class="right">

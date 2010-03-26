@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Command &mdash; envbuilder v0.3 documentation</title>
+    <title>command &mdash; envbuilder v0.3 documentation</title>
     <link rel="stylesheet" href="static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,6 +23,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="envbuilder v0.3 documentation" href="index.html" />
+    <link rel="next" title="sh - shell commands" href="sh.html" />
     <link rel="prev" title="Developer documentation" href="index.html" /> 
   </head>
   <body>
@@ -34,6 +35,8 @@
              accesskey="I">index</a> |
           <a href="modindex.html" title="Global Module Index"
              accesskey="M">modules</a> |
+          <a href="sh.html" title="sh - shell commands"
+             accesskey="N">next</a> |
           <a href="index.html" title="Developer documentation"
              accesskey="P">previous</a>
         </div>
@@ -49,7 +52,7 @@
           <div class="body">
             
   <div class="section" id="command">
-<h1>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
+<h1>command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="writing-your-own-envbuilder-commands-in-python">
 <h2>Writing your own envbuilder commands in Python<a class="headerlink" href="#writing-your-own-envbuilder-commands-in-python" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="hello-world">
@@ -118,6 +121,12 @@ Otherwise, some command-line options might not work.</p>
 This should not be overridden in subclasses unless you know
 what you are doing.</dd></dl>
 
+<dl class="method">
+<dt id="envbuilder.command.Command.handle_dependencies">
+<tt class="descname">handle_dependencies</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.handle_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd>Install any python dependencies that are not findable by
+pkg_resources.require.</dd></dl>
+
 <dl class="classmethod">
 <dt id="envbuilder.command.Command.lookup_command">
 <em class="property">classmethod </em><tt class="descname">lookup_command</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.lookup_command" title="Permalink to this definition">¶</a></dt>
@@ -134,11 +143,24 @@ to &#8216;from py import something&#8217;.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="envbuilder.command.Command.main">
+<tt class="descname">main</tt><big>(</big><em>args</em>, <em>config</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.main" title="Permalink to this definition">¶</a></dt>
+<dd>This is the function to call to run a command.  This
+does handling of various tasks such as installing
+dependencies.</dd></dl>
+
+<dl class="method">
 <dt id="envbuilder.command.Command.print_help">
 <tt class="descname">print_help</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.print_help" title="Permalink to this definition">¶</a></dt>
 <dd>Print out the full help message.  By default, this calls
 the print_help method on the parser returned by
 <a title="envbuilder.command.Command.get_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_arg_parser"><tt class="xref docutils literal"><span class="pre">get_arg_parser()</span></tt></a>.</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.run">
+<tt class="descname">run</tt><big>(</big><em>args</em>, <em>config</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.run" title="Permalink to this definition">¶</a></dt>
+<dd>Stub class to be overridden in subclasses.  This is
+where the actual logic of the command should go.</dd></dl>
 
 </dd></dl>
 
@@ -153,11 +175,13 @@ the print_help method on the parser returned by
         <div class="sidebar">
           <h3>Contents</h3>
           <ul class="current">
-<li class="toctree-l1 current"><a class="current reference external" href="">Command</a><ul>
+<li class="toctree-l1 current"><a class="current reference external" href="">command</a><ul>
 <li class="toctree-l2"><a class="reference external" href="#writing-your-own-envbuilder-commands-in-python">Writing your own envbuilder commands in Python</a></li>
 <li class="toctree-l2"><a class="reference external" href="#module-envbuilder.command">Reference</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference external" href="sh.html">sh - shell commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="util.html">util</a></li>
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>
@@ -182,6 +206,8 @@ the print_help method on the parser returned by
              >index</a> |
           <a href="modindex.html" title="Global Module Index"
              >modules</a> |
+          <a href="sh.html" title="sh - shell commands"
+             >next</a> |
           <a href="index.html" title="Developer documentation"
              >previous</a>
             <br/>

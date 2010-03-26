@@ -9,6 +9,8 @@ Contents:
    :maxdepth: 2
 
    command
+   sh
+   util
 
 Indices and tables
 ==================

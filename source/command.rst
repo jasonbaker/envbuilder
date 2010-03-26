@@ -1,4 +1,4 @@
-Command
+command
 ===============
 
 Writing your own envbuilder commands in Python
