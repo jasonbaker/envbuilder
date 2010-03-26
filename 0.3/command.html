@@ -53,10 +53,8 @@
             
   <div class="section" id="command">
 <h1>command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="writing-your-own-envbuilder-commands-in-python">
-<h2>Writing your own envbuilder commands in Python<a class="headerlink" href="#writing-your-own-envbuilder-commands-in-python" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="hello-world">
-<h3>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h3>
+<h2>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
 <p>Here is the command to write a hello world command using envbuilder:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">envbuilder.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">envbuilder.sh</span> <span class="kn">import</span> <span class="n">notify</span>
@@ -97,7 +95,7 @@ Thus, to call the hello command, you would do the following:</p>
 arguments that envbuilder takes).</p>
 </div>
 <div class="section" id="using-a-shell-command">
-<h3>Using a shell command<a class="headerlink" href="#using-a-shell-command" title="Permalink to this headline">¶</a></h3>
+<h2>Using a shell command<a class="headerlink" href="#using-a-shell-command" title="Permalink to this headline">¶</a></h2>
 <p>Envbuilder will allow you to run any arbitrary shell command easily.  Let&#8217;s
 modify the hello command to echo hello from the shell instead of using the
 notify function.  This depends on the <a title="envbuilder.sh.sh" class="reference external" href="sh.html#envbuilder.sh.sh"><tt class="xref docutils literal"><span class="pre">sh()</span></tt></a> function.</p>
@@ -123,7 +121,7 @@ Hello, world!
 <p>That was easy, wasn&#8217;t it?</p>
 </div>
 <div class="section" id="running-a-webserver">
-<h3>Running a webserver<a class="headerlink" href="#running-a-webserver" title="Permalink to this headline">¶</a></h3>
+<h2>Running a webserver<a class="headerlink" href="#running-a-webserver" title="Permalink to this headline">¶</a></h2>
 <p>You can even run a webserver under envbuilder:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">helloweb</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -156,7 +154,7 @@ ImportError: No module named cherrypy
 <p>We don&#8217;t know if the user has cherrypy installed or not!</p>
 </div>
 <div class="section" id="dependency-management">
-<h3>Dependency management<a class="headerlink" href="#dependency-management" title="Permalink to this headline">¶</a></h3>
+<h2>Dependency management<a class="headerlink" href="#dependency-management" title="Permalink to this headline">¶</a></h2>
 <p>Believe it or not, python dependencies aren&#8217;t terribly difficult to deal with.  In
 this case, we just need to change the above command to this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">helloweb</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
@@ -180,7 +178,6 @@ a command to run.  If you run the command again:</p>
 </pre></div>
 </div>
 <p>You should get a cherrypy webserver running and serving on <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>.</p>
-</div>
 </div>
 <div class="section" id="module-envbuilder.command">
 <h2>Reference<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h2>
@@ -262,7 +259,10 @@ where the actual logic of the command should go.</dd></dl>
           <h3>Contents</h3>
           <ul class="current">
 <li class="toctree-l1 current"><a class="current reference external" href="">command</a><ul>
-<li class="toctree-l2"><a class="reference external" href="#writing-your-own-envbuilder-commands-in-python">Writing your own envbuilder commands in Python</a></li>
+<li class="toctree-l2"><a class="reference external" href="#hello-world">Hello world</a></li>
+<li class="toctree-l2"><a class="reference external" href="#using-a-shell-command">Using a shell command</a></li>
+<li class="toctree-l2"><a class="reference external" href="#running-a-webserver">Running a webserver</a></li>
+<li class="toctree-l2"><a class="reference external" href="#dependency-management">Dependency management</a></li>
 <li class="toctree-l2"><a class="reference external" href="#module-envbuilder.command">Reference</a></li>
 </ul>
 </li>

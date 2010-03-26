@@ -1,9 +1,6 @@
 command
 ===============
 
-Writing your own envbuilder commands in Python
--------------------------------------------------
-
 Hello world
 ~~~~~~~~~~~~~~~
 
@@ -148,7 +145,7 @@ a command to run.  If you run the command again:
 You should get a cherrypy webserver running and serving on `<http://127.0.0.1:8080>`_.
 
 Reference
----------------
+~~~~~~~~~~~~~~~~
 
 .. automodule:: envbuilder.command
     :members:
