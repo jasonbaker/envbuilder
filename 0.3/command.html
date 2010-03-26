@@ -122,6 +122,65 @@ Hello, world!
 </div>
 <p>That was easy, wasn&#8217;t it?</p>
 </div>
+<div class="section" id="running-a-webserver">
+<h3>Running a webserver<a class="headerlink" href="#running-a-webserver" title="Permalink to this headline">¶</a></h3>
+<p>You can even run a webserver under envbuilder:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">helloweb</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a webserver that prints hello world</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;helloweb&#39;</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cherrypy</span>
+        <span class="k">class</span> <span class="nc">HelloWorld</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s">&#39;Hello, world!&#39;</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">exposed</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">quickstart</span><span class="p">(</span><span class="n">HelloWorld</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>There&#8217;s just one problem:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.helloweb
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/home/jason/.virtualenvs/main/bin/envb&quot;</span>, line 8, in &lt;module&gt;
+    load_entry_point<span class="o">(</span><span class="s1">&#39;envbuilder==0.3.0c2.dev&#39;</span>, <span class="s1">&#39;console_scripts&#39;</span>, <span class="s1">&#39;envb&#39;</span><span class="o">)()</span>
+  File <span class="s2">&quot;/home/jason/src/envbuilder/envbuilder/run.py&quot;</span>, line 34, in main
+    command.main<span class="o">(</span>config.args, config<span class="o">)</span>
+  File <span class="s2">&quot;/home/jason/src/envbuilder/envbuilder/command.py&quot;</span>, line 130, in main
+    self.run<span class="o">(</span>args, config<span class="o">)</span>
+  File <span class="s2">&quot;./envb-site-commands/hello.py&quot;</span>, line 26, in run
+    import cherrypy
+ImportError: No module named cherrypy
+</pre></div>
+</div>
+<p>We don&#8217;t know if the user has cherrypy installed or not!</p>
+</div>
+<div class="section" id="dependency-management">
+<h3>Dependency management<a class="headerlink" href="#dependency-management" title="Permalink to this headline">¶</a></h3>
+<p>Believe it or not, python dependencies aren&#8217;t terribly difficult to deal with.  In
+this case, we just need to change the above command to this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">helloweb</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a webserver that prints hello world</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;helloweb&#39;</span>
+    <span class="n">py_dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;cherrypy&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cherrypy</span>
+        <span class="k">class</span> <span class="nc">HelloWorld</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s">&#39;Hello, world!&#39;</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">exposed</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">quickstart</span><span class="p">(</span><span class="n">HelloWorld</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The py_dependencies attribute is a list of dependencies that must be installed for
+a command to run.  If you run the command again:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.helloweb
+</pre></div>
+</div>
+<p>You should get a cherrypy webserver running and serving on <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>.</p>
+</div>
 </div>
 <div class="section" id="module-envbuilder.command">
 <h2>Reference<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h2>
