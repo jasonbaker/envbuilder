@@ -9,7 +9,7 @@ BINDIR = os.path.join(os.getcwd(), 'bin')
 
 def sh(cmd, cwd='.'):
     """
-    A somewhat easier interface to subprocess.check_call.
+    Execute command *cmd* from within directory *cwd*.
     """
     cmd = cmd.format(BINDIR=BINDIR)
     cwd = os.path.abspath(cwd)
