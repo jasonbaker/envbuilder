@@ -198,6 +198,27 @@ with the dir option of the parcel.  One thing to note is that percent variables
 don't use the normal interpolation path.  Thus, the percent variable must be
 defined within the parcel itself, not the DEFAULT section.
 
+The envb standard library
+---------------------------
+
+You may notice messages like the following:  "WARNING:  unable to find builtin commands".
+This is because envbuilder cannot locate the site-commands parcel.  This is basically
+a parcel named site-commands that contains various additional commands that can do
+things that you can't define in the config file.
+
+Creating such a parcel is easy.  Here's one that uses the standard 
+`envb-site-commands <http://github.com/jasonbaker/envb-site-commands>`_ repository::
+
+  [[site-commands]]
+  dir = 'envb-site-commands'
+  checkout = 'git clone http://github.com/jasonbaker/envb-site-commands.git'
+
+Note that you don't have to use the envb-site-commands repository.  You can use
+any parcel you want!  See the `documentation <http://jasonbaker.github.com/envbuilder/0.3/>`_
+on developing envbuilder commands in Python (but note that it is incomplete at the moment).
+
+
+
 Questions
 ------------------
 
