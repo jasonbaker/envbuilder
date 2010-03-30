@@ -12,7 +12,7 @@ setup(
     name='envbuilder',
     author='Jason Baker',
     author_email='amnorvend@gmail.com',
-    version='0.3.0c3',
+    version='0.3.0c4',
     packages=find_packages(),
     install_requires=['argparse>=1.1', 'pip', 'ConfigObj>=4.7.2',
                       'virtualenv', 'pysistence'],
