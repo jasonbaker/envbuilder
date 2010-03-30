@@ -31,7 +31,7 @@ def main():
     # hack - We need config to get the command, but we also need command
     # to get args.  Thus, we attach the args attribute after instantiation
     config.args = command.parse_args(args.arguments)
-    command.run(config.args, config)
+    command.main(config.args, config)
 
 def handle_command_path(config):
     for path in config['project']['command-path']:

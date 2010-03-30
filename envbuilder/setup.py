@@ -29,8 +29,5 @@ class Setup(BuiltinCommand):
         parser.add_argument('-n', '--no-create', default=False,
                             action='store_true',
                             help="Don't (re)create the virtualenv")
-        parser.add_argument('-U', '--upgrade', default=False,
-                            action='store_true',
-                            help='Upgrade requirements listed in the .env file')
         return parser
 
