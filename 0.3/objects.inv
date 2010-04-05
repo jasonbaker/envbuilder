@@ -6,13 +6,13 @@ envbuilder.util mod util.html
 envbuilder.sh mod sh.html
 envbuilder.sh.output_packages function sh.html
 envbuilder.command.Command.handle_dependencies method command.html
-envbuilder.sh.terminate function sh.html
+envbuilder.sh.sh function sh.html
 envbuilder.command.Command.main method command.html
 envbuilder.command.Command.get_base_arg_parser method command.html
 envbuilder.command.Command.print_help method command.html
 envbuilder.command.Command class command.html
 envbuilder.command.Command.lookup_command classmethod command.html
-envbuilder.sh.sh function sh.html
+envbuilder.sh.terminate function sh.html
 envbuilder.util.classproperty attribute util.html
 envbuilder.command.Command.get_arg_parser method command.html
 envbuilder.command.Command.run method command.html

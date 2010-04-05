@@ -144,6 +144,69 @@ a command to run.  If you run the command again:
 
 You should get a cherrypy webserver running and serving on `<http://127.0.0.1:8080>`_.
 
+Command-line arguments
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You may also add command-line arguments to an envbuilder command by overriding
+:meth:`~envbuilder.command.Command.get_arg_parser`.  This method must return a
+parser that can parse the command-line.  Unless you really know what you're doing,
+you should get the parser from :meth:`~envbuilder.command.Command.get_base_arg_parser`.
+This will give you an instance of an `argparse.ArgumentParser <http://argparse.googlecode.com/svn/tags/r11/doc/api-docs.html>`_
+that you may add arguments to.  For example, we can provide an argument for our
+hello command::
+
+    class named_hello(Command):
+        """
+	Prints hello to a specified user.
+	"""
+        name = 'named_hello'
+        def get_arg_parser(self):
+            parser = self.get_base_arg_parser()
+            parser.add_argument('--name', default='world',
+                                help='Specify who we are greeting')
+            return parser
+    
+        def run(self, args, config):
+            notify('Hello, %s!' % args.name)
+
+We can now customize who we are greeting:
+
+.. code-block:: bash
+
+    envb hello.named_hello
+    > Hello, world!
+    
+    envb hello.named_hello --name Jason
+    > Hello, Jason!
+
+Adding help
+~~~~~~~~~~~~~~~~~
+
+Adding help is so easy, it's done for you automatically!
+
+.. code-block:: bash
+
+    envb help hello.named_hello
+    
+        Prints hello to a specified user.
+        
+    usage: envb named_hello [-h] [-p PARCELS] [-v VERBOSE] [--version] [-N] [-U]
+                            [--name NAME]
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      -p PARCELS, --parcels PARCELS
+                            Select parcels to run this command on.
+      -v VERBOSE, --verbose VERBOSE
+                            Print verbose errors.
+      --version
+      -N, --no-deps         Don't automatically install a command's dependencies
+      -U, --upgrade         Update dependencies
+      --name NAME           Specify who we are greeting
+
+As you can see, named_hello's docstring is printed out as the description of the
+command, and the help for the --name option is specified as well.
+
 Reference
 ~~~~~~~~~~~~~~~~
 

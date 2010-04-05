@@ -179,6 +179,64 @@ a command to run.  If you run the command again:</p>
 </div>
 <p>You should get a cherrypy webserver running and serving on <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>.</p>
 </div>
+<div class="section" id="command-line-arguments">
+<h2>Command-line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<p>You may also add command-line arguments to an envbuilder command by overriding
+<a title="envbuilder.command.Command.get_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_arg_parser"><tt class="xref docutils literal"><span class="pre">get_arg_parser()</span></tt></a>.  This method must return a
+parser that can parse the command-line.  Unless you really know what you&#8217;re doing,
+you should get the parser from <a title="envbuilder.command.Command.get_base_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_base_arg_parser"><tt class="xref docutils literal"><span class="pre">get_base_arg_parser()</span></tt></a>.
+This will give you an instance of an <a class="reference external" href="http://argparse.googlecode.com/svn/tags/r11/doc/api-docs.html">argparse.ArgumentParser</a>
+that you may add arguments to.  For example, we can provide an argument for our
+hello command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">named_hello</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints hello to a specified user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;named_hello&#39;</span>
+    <span class="k">def</span> <span class="nf">get_arg_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_base_arg_parser</span><span class="p">()</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;--name&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;world&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s">&#39;Specify who we are greeting&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parser</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">notify</span><span class="p">(</span><span class="s">&#39;Hello, </span><span class="si">%s</span><span class="s">!&#39;</span> <span class="o">%</span> <span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now customize who we are greeting:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.named_hello
+&gt; Hello, world!
+
+envb hello.named_hello --name Jason
+&gt; Hello, Jason!
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-help">
+<h2>Adding help<a class="headerlink" href="#adding-help" title="Permalink to this headline">¶</a></h2>
+<p>Adding help is so easy, it&#8217;s done for you automatically!</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb <span class="nb">help </span>hello.named_hello
+
+    Prints hello to a specified user.
+
+usage: envb named_hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-p PARCELS<span class="o">]</span> <span class="o">[</span>-v VERBOSE<span class="o">]</span> <span class="o">[</span>--version<span class="o">]</span> <span class="o">[</span>-N<span class="o">]</span> <span class="o">[</span>-U<span class="o">]</span>
+                        <span class="o">[</span>--name NAME<span class="o">]</span>
+
+optional arguments:
+  -h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+  -p PARCELS, --parcels PARCELS
+                        Select parcels to run this <span class="nb">command </span>on.
+  -v VERBOSE, --verbose VERBOSE
+                        Print verbose errors.
+  --version
+  -N, --no-deps         Don<span class="s1">&#39;t automatically install a command&#39;</span>s dependencies
+  -U, --upgrade         Update dependencies
+  --name NAME           Specify who we are greeting
+</pre></div>
+</div>
+<p>As you can see, named_hello&#8217;s docstring is printed out as the description of the
+command, and the help for the &#8211;name option is specified as well.</p>
+</div>
 <div class="section" id="module-envbuilder.command">
 <h2>Reference<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -263,6 +321,8 @@ where the actual logic of the command should go.</dd></dl>
 <li class="toctree-l2"><a class="reference external" href="#using-a-shell-command">Using a shell command</a></li>
 <li class="toctree-l2"><a class="reference external" href="#running-a-webserver">Running a webserver</a></li>
 <li class="toctree-l2"><a class="reference external" href="#dependency-management">Dependency management</a></li>
+<li class="toctree-l2"><a class="reference external" href="#command-line-arguments">Command-line arguments</a></li>
+<li class="toctree-l2"><a class="reference external" href="#adding-help">Adding help</a></li>
 <li class="toctree-l2"><a class="reference external" href="#module-envbuilder.command">Reference</a></li>
 </ul>
 </li>
