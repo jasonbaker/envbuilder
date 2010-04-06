@@ -29,6 +29,15 @@ Envbuilder has a few goals:
 
 For more information, see the `envbuilder documentation <http://jasonbaker.github.com/envbuilder/0.3>`_.
 
+Installing
+---------------
+
+You may install the current development version using easy_install::
+
+    easy_install envbuilder==dev
+
+Or you may `download it directly <http://github.com/jasonbaker/envbuilder/zipball/master>`_.
+
 Support
 ------------------
 
