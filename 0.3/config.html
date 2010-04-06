@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>util &mdash; envbuilder v0.3 documentation</title>
+    <title>Configuration &mdash; envbuilder v0.3 documentation</title>
     <link rel="stylesheet" href="static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,8 +23,7 @@
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
     <link rel="top" title="envbuilder v0.3 documentation" href="index.html" />
-    <link rel="next" title="Configuration" href="config.html" />
-    <link rel="prev" title="sh - shell commands" href="sh.html" /> 
+    <link rel="prev" title="util" href="util.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -35,9 +34,7 @@
              accesskey="I">index</a> |
           <a href="modindex.html" title="Global Module Index"
              accesskey="M">modules</a> |
-          <a href="config.html" title="Configuration"
-             accesskey="N">next</a> |
-          <a href="sh.html" title="sh - shell commands"
+          <a href="util.html" title="util"
              accesskey="P">previous</a>
         </div>
        </div>
@@ -51,14 +48,49 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-envbuilder.util">
-<h1>util<a class="headerlink" href="#module-envbuilder.util" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-envbuilder.config">
+<h1>Configuration<a class="headerlink" href="#module-envbuilder.config" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="envbuilder.config.Config">
+<em class="property">class </em><tt class="descclassname">envbuilder.config.</tt><tt class="descname">Config</tt><big>(</big><em>filepath=None</em>, <em>config=None</em>, <em>name=None</em>, <em>args=None</em><big>)</big><a class="headerlink" href="#envbuilder.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This represents the actual .env file.</p>
+<dl class="method">
+<dt id="envbuilder.config.Config.get">
+<tt class="descname">get</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#envbuilder.config.Config.get" title="Permalink to this definition">¶</a></dt>
+<dd>Equivalent to dict.get.</dd></dl>
+
 <dl class="attribute">
-<dt id="envbuilder.util.classproperty">
-<tt class="descclassname">envbuilder.util.</tt><tt class="descname">classproperty</tt><a class="headerlink" href="#envbuilder.util.classproperty" title="Permalink to this definition">¶</a></dt>
-<dd><p>A property that may be defined on a class.</p>
-<p>This comes from Alex Martelli:</p>
-<p><a class="reference external" href="http://stackoverflow.com/questions/2173206/is-there-any-way-to-create-a-class-property-in-python/2173321#2173321">http://stackoverflow.com/questions/2173206/is-there-any-way-to-create-a-class-property-in-python/2173321#2173321</a></p>
+<dt id="envbuilder.config.Config.parcel_dirs">
+<tt class="descname">parcel_dirs</tt><a class="headerlink" href="#envbuilder.config.Config.parcel_dirs" title="Permalink to this definition">¶</a></dt>
+<dd>The directories of all parcels specified by the user
+via the -p flag.</dd></dl>
+
+<dl class="attribute">
+<dt id="envbuilder.config.Config.parcel_names">
+<tt class="descname">parcel_names</tt><a class="headerlink" href="#envbuilder.config.Config.parcel_names" title="Permalink to this definition">¶</a></dt>
+<dd>The names of parcels specified by the user via
+the -p flag.</dd></dl>
+
+<dl class="attribute">
+<dt id="envbuilder.config.Config.parcels">
+<tt class="descname">parcels</tt><a class="headerlink" href="#envbuilder.config.Config.parcels" title="Permalink to this definition">¶</a></dt>
+<dd>The config sections representing all parcels specified
+by the user via the -p flag.</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.config.Config.run_command">
+<tt class="descname">run_command</tt><big>(</big><em>cmd</em>, <em>cwd=None</em>, <em>parcels=None</em>, <em>required=True</em><big>)</big><a class="headerlink" href="#envbuilder.config.Config.run_command" title="Permalink to this definition">¶</a></dt>
+<dd>Run a command on parcels selected from the command-line via the -p flag.
+The argument cmd specifies the config option name of the
+command, and cwd is the working directory to run the command
+from within.  If cwd is not specified or None, it will be the
+name of the parcel.</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.config.Config.select_parcels">
+<tt class="descname">select_parcels</tt><big>(</big><em>parcel_names</em><big>)</big><a class="headerlink" href="#envbuilder.config.Config.select_parcels" title="Permalink to this definition">¶</a></dt>
+<dd>Return a subset of parcels with names in parcel_names.</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -73,8 +105,8 @@
           <ul class="current">
 <li class="toctree-l1"><a class="reference external" href="command.html">command</a></li>
 <li class="toctree-l1"><a class="reference external" href="sh.html">sh - shell commands</a></li>
-<li class="toctree-l1 current"><a class="current reference external" href="">util</a></li>
-<li class="toctree-l1"><a class="reference external" href="config.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference external" href="util.html">util</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">Configuration</a></li>
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>
@@ -99,12 +131,10 @@
              >index</a> |
           <a href="modindex.html" title="Global Module Index"
              >modules</a> |
-          <a href="config.html" title="Configuration"
-             >next</a> |
-          <a href="sh.html" title="sh - shell commands"
+          <a href="util.html" title="util"
              >previous</a>
             <br/>
-            <a href="sources/util.txt"
+            <a href="sources/config.txt"
                rel="nofollow">Show Source</a>
         </div>
 

@@ -11,6 +11,7 @@ Contents:
    command
    sh
    util
+   config
 
 Indices and tables
 ==================
