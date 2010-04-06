@@ -6,14 +6,14 @@ envbuilder.util mod util.html
 envbuilder.sh mod sh.html
 envbuilder.config mod config.html
 envbuilder.config.Config.get method config.html
-envbuilder.sh.sh function sh.html
+envbuilder.config.Config.parcels attribute config.html
 envbuilder.sh.output_packages function sh.html
+envbuilder.sh.sh function sh.html
 envbuilder.config.Config.parcel_dirs attribute config.html
 envbuilder.config.Config.parcel_names attribute config.html
 envbuilder.command.Command.handle_dependencies method command.html
 envbuilder.config.Config.run_command method config.html
 envbuilder.command.Command.get_base_arg_parser method command.html
-envbuilder.config.Config.parcels attribute config.html
 envbuilder.command.Command.print_help method command.html
 envbuilder.command.Command class command.html
 envbuilder.command.Command.lookup_command classmethod command.html

@@ -8,10 +8,12 @@ Contents:
 .. toctree::
    :maxdepth: 3
 
+   command-line
    command
    sh
    util
    config
+
 
 Indices and tables
 ==================
