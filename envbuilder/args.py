@@ -10,7 +10,7 @@ class Arguments(object):
             return self.args[1]
         except IndexError:
             # This is an empty list, so return nothing.
-            return ''
+            return 'help' 
 
     @property
     def arguments(self):
