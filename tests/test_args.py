@@ -4,7 +4,7 @@ def test_get_command():
     # Remember: sys.argv[0] is the program name
     args = Arguments(['foo', 'bar'])
     actual_command = args.command
-    expected_command = 'foo'
+    expected_command = 'bar'
     assert actual_command == expected_command
 
 def test_get_empty_command():
