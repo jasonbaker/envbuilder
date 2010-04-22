@@ -32,7 +32,12 @@ For more information, see the `envbuilder documentation <http://jasonbaker.githu
 Installing
 ---------------
 
-You may install the current development version using easy_install::
+For the latest stable version, the easiest way to install envbuilder is
+through easy_intall::
+
+    easy_install envbuilder
+
+You may also install the current development version using easy_install::
 
     easy_install envbuilder==dev
 
