@@ -79,10 +79,9 @@ class Command(object):
         parser.add_argument('-p', '--parcels',
                             help = 'Select parcels to run this command on.')
         parser.add_argument('-v', '--verbose',
+                            action='store_true',
                             default=True,
                             help='Print verbose errors.')
-        parser.add_argument('--version', action='version',
-                            version=envbuilder.__version__)
         parser.add_argument('-N', '--no-deps',
                             default=False, action='store_true',
                             help="Don't automatically install a command's dependencies")

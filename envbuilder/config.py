@@ -15,6 +15,9 @@ from envbuilder.sh import sh, terminate, notify
 configspec = resource_filename(__name__, 'configspec')
 
 class Config(object):
+    """
+    This represents the actual .env file.
+    """
     _config = None
     _val = None
     def __init__(self, filepath=None, config=None, name=None, args=None):
@@ -93,20 +96,27 @@ class Config(object):
         val['name'] = key
 
     def __getitem__(self, name):
+        """
+        Get the option or subsection named by :arg:`name`.
+        """
         try:
             return self._config[name]
         except MissingInterpolationOption, e:
             self._handle_missing_interp(e, self.filepath)
 
     def get(self, *args, **kwargs):
+        """
+        Equivalent to dict.get.
+        """
         return self._config.get(*args, **kwargs)
 
     def run_command(self, cmd, cwd=None, parcels=None, required=True):
         """
-        Run a command on all parcels.  The argument cmd specifies the
-        config option name of the command, and cwd is the working
-        directory to run the command from within.  If cwd is not
-        specified or None, it will be the name of the parcel.
+        Run a command on parcels selected from the command-line via the -p flag.
+        The argument cmd specifies the config option name of the
+        command, and cwd is the working directory to run the command
+        from within.  If cwd is not specified or None, it will be the
+        name of the parcel.
         """
         if parcels is None:
             parcels = self.parcels
@@ -144,6 +154,10 @@ class Config(object):
     
     @property
     def parcel_names(self):
+        """
+        The names of parcels specified by the user via
+        the -p flag.
+        """
         if self.args.parcels:
             return self.args.parcels.split(',')
         else:
@@ -151,12 +165,20 @@ class Config(object):
 
     @property
     def parcel_dirs(self):
+        """
+        The directories of all parcels specified by the user
+        via the -p flag.
+        """
         project_section = self._config['project']
         for name in self.parcel_names:
             yield project_section[name]['dir']
             
     @property
     def parcels(self):
+        """
+        The config sections representing all parcels specified
+        by the user via the -p flag.
+        """
         parcel_names = self.parcel_names
         project = self._config['project']
         if not isinstance(parcel_names, (list, tuple)):
