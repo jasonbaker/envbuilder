@@ -21,3 +21,14 @@ class TestNoCreateVenv(TestCreateVenv):
         self.env.run('envb setup')
         result = self.env.run('envb setup -N')
         assert python_script not in result.files_updated
+
+class TestRequires(EnvbTest):
+    env_file = """\
+    [project]
+    parcels=[]
+    requires='pysistence', 'yolk'
+    """
+    def test(self):
+       self.env.run('envb setup')
+       result = self.env.run('python -c "import pysistence"')
+       assert result.returncode == 0
