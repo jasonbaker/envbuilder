@@ -19,7 +19,7 @@ class TestCreateVenv(EnvbTest):
 class TestNoCreateVenv(TestCreateVenv):
     def test(self):
         self.env.run('envb setup')
-        result = self.env.run('envb setup -N')
+        result = self.env.run('envb setup -n')
         assert python_script not in result.files_updated
 
 class TestRequires(EnvbTest):
