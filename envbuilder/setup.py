@@ -18,9 +18,9 @@ class Setup(BuiltinCommand):
         else:
             upgrade_flag = ''
         requirements = config['project']['requires']
-        easy_install = config['project']['easy_install'] 
+        pip_install = config['project']['pip_install'] 
         for requirement in requirements:
-            sh('%s %s %s' % (easy_install, upgrade_flag, requirement))
+            sh('%s %s %s' % (pip_install, upgrade_flag, requirement))
                 
         config.run_command('setup', required=False)
         
