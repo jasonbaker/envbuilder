@@ -13,3 +13,4 @@ include
 *#*
 pip-log.txt
 .Python
+*.swp
