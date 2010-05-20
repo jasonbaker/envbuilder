@@ -54,6 +54,16 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 Release Notes
 ------------------
 
+0.4.0
+~~~~~~~~~~~~~~~~~~
+Compatibility issues:
+
+* The "requires" option is deprecated.
+
+Other improvements:
+
+* Support for requirements files
+
 0.3.0
 ~~~~~~~~~~~~~~~~~~
 
@@ -62,6 +72,7 @@ Compatibility issues:
 * Most commands have been moved to envb-site-commands.
 
 Other improvements:
+
 * Command handling has been revamped to allow for more plugability
 * Support for envb-site-commands
 * Dependency handling for commands
