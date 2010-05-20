@@ -1,6 +1,6 @@
 import os.path, sys
 
-from envbuilder.sh import sh
+from envbuilder.sh import sh, warn
 from envbuilder.command import BuiltinCommand
 
 class Setup(BuiltinCommand):
@@ -18,6 +18,9 @@ class Setup(BuiltinCommand):
         else:
             upgrade_flag = ''
         requirements = config['project']['requires']
+        if requirements:
+            warn('The requires attribute is deprecated and will be removed in a '
+                 'future release.')
         pip_install = config['project']['pip_install'] 
         for requirement in requirements:
             sh('%s %s %s' % (pip_install, upgrade_flag, requirement))
