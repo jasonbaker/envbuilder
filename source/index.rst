@@ -83,9 +83,9 @@ This section is the top-level section.  It has two possible options:
 * **parcels** - These are the parcels to be installed in the order they are
   to be installed.  This is a list delimited by commas.
 
-* **requires** - This is a list of packages that will be easy_installed into
-  the virtualenv when setup is run.  If the -U flag is passed in to setup,
-  these will be upgraded.
+* **requirements** - This is a list of all pip requirements files to be used in the
+  project.  This defaults to 'requirements.txt', (note the comma; it's a list containing only
+  requirements.txt).
 
 DEFAULT
 +++++++++++++++++++++
