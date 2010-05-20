@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>command &mdash; envbuilder v0.4 documentation</title>
+    <link rel="stylesheet" href="static/agogo.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="envbuilder v0.4 documentation" href="index.html" />
+    <link rel="next" title="sh - shell commands" href="sh.html" />
+    <link rel="prev" title="Command-line Reference" href="command-line.html" /> 
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header">
+        <h1><a href="index.html">envbuilder v0.4 documentation</a></h1>
+        <div class="rel">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a> |
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="sh.html" title="sh - shell commands"
+             accesskey="N">next</a> |
+          <a href="command-line.html" title="Command-line Reference"
+             accesskey="P">previous</a>
+        </div>
+       </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="document">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="command">
+<h1>command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hello-world">
+<h2>Hello world<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h2>
+<p>Here is the command to write a hello world command using envbuilder:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">envbuilder.command</span> <span class="kn">import</span> <span class="n">Command</span>
+<span class="kn">from</span> <span class="nn">envbuilder.sh</span> <span class="kn">import</span> <span class="n">notify</span>
+
+<span class="k">class</span> <span class="nc">hello</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print hello world.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;hello&#39;</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">notify</span><span class="p">(</span><span class="s">&#39;Hello, world!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This command is actually stored in the <a class="reference external" href="http://github.com/jasonbaker/envb-site-commands">envb-site-commands</a>
+package.  To try it out, you simply need to use the following .env file:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="k">[project]</span>
+<span class="na">parcels</span> <span class="o">=</span> <span class="s">&#39;site-commands&#39;</span>
+
+    <span class="k">[[site-commands]]</span>
+    <span class="na">checkout</span> <span class="o">=</span> <span class="s">&#39;git clone git@github.com:jasonbaker/envb-site-commands.git&#39;</span>
+</pre></div>
+</div>
+<p>To access non-builtin commands, envbuilder uses a dot notation.  The hello
+command in site-commands is stored in hello.py.  If we wanted to use this
+in Python code, we would do something like the following:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">hello</span>
+<span class="n">hello_cmd</span> <span class="o">=</span> <span class="n">hello</span><span class="o">.</span><span class="n">hello</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The important part is the &#8220;hello.hello&#8221;.  This is the name that Python uses
+once a module has been imported.  Envbuilder will allow the same syntax.
+Thus, to call the hello command, you would do the following:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.hello
+&gt; Hello, world!
+</pre></div>
+</div>
+<p>You are even provided a basic help command (though it only shows the default
+arguments that envbuilder takes).</p>
+</div>
+<div class="section" id="using-a-shell-command">
+<h2>Using a shell command<a class="headerlink" href="#using-a-shell-command" title="Permalink to this headline">¶</a></h2>
+<p>Envbuilder will allow you to run any arbitrary shell command easily.  Let&#8217;s
+modify the hello command to echo hello from the shell instead of using the
+notify function.  This depends on the <a title="envbuilder.sh.sh" class="reference external" href="sh.html#envbuilder.sh.sh"><tt class="xref py py-func docutils literal"><span class="pre">sh()</span></tt></a> function.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">envbuilder.command</span> <span class="kn">import</span> <span class="n">Command</span>
+<span class="kn">from</span> <span class="nn">envbuilder.sh</span> <span class="kn">import</span> <span class="n">sh</span>
+
+<span class="k">class</span> <span class="nc">hellosh</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print hello world.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;hello&#39;</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">sh</span><span class="p">(</span><span class="s">&quot;echo &#39;Hello, world!&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we run this, we get the following output:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.hellosh
+&gt; <span class="nb">echo</span> <span class="s1">&#39;Hello, world!&#39;</span>
+-&gt; <span class="o">(</span>From: /home/jason/src/interface_dev<span class="o">)</span>
+Hello, world!
+</pre></div>
+</div>
+<p>That was easy, wasn&#8217;t it?</p>
+</div>
+<div class="section" id="running-a-webserver">
+<h2>Running a webserver<a class="headerlink" href="#running-a-webserver" title="Permalink to this headline">¶</a></h2>
+<p>You can even run a webserver under envbuilder:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">helloweb</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a webserver that prints hello world</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;helloweb&#39;</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cherrypy</span>
+        <span class="k">class</span> <span class="nc">HelloWorld</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s">&#39;Hello, world!&#39;</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">exposed</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">quickstart</span><span class="p">(</span><span class="n">HelloWorld</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>There&#8217;s just one problem:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.helloweb
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">&quot;/home/jason/.virtualenvs/main/bin/envb&quot;</span>, line 8, in &lt;module&gt;
+    load_entry_point<span class="o">(</span><span class="s1">&#39;envbuilder==0.3.0c2.dev&#39;</span>, <span class="s1">&#39;console_scripts&#39;</span>, <span class="s1">&#39;envb&#39;</span><span class="o">)()</span>
+  File <span class="s2">&quot;/home/jason/src/envbuilder/envbuilder/run.py&quot;</span>, line 34, in main
+    command.main<span class="o">(</span>config.args, config<span class="o">)</span>
+  File <span class="s2">&quot;/home/jason/src/envbuilder/envbuilder/command.py&quot;</span>, line 130, in main
+    self.run<span class="o">(</span>args, config<span class="o">)</span>
+  File <span class="s2">&quot;./envb-site-commands/hello.py&quot;</span>, line 26, in run
+    import cherrypy
+ImportError: No module named cherrypy
+</pre></div>
+</div>
+<p>We don&#8217;t know if the user has cherrypy installed or not!</p>
+</div>
+<div class="section" id="dependency-management">
+<h2>Dependency management<a class="headerlink" href="#dependency-management" title="Permalink to this headline">¶</a></h2>
+<p>Believe it or not, python dependencies aren&#8217;t terribly difficult to deal with.  In
+this case, we just need to change the above command to this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">helloweb</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a webserver that prints hello world</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;helloweb&#39;</span>
+    <span class="n">py_dependencies</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;cherrypy&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cherrypy</span>
+        <span class="k">class</span> <span class="nc">HelloWorld</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s">&#39;Hello, world!&#39;</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">exposed</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">cherrypy</span><span class="o">.</span><span class="n">quickstart</span><span class="p">(</span><span class="n">HelloWorld</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The py_dependencies attribute is a list of dependencies that must be installed for
+a command to run.  If you run the command again:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.helloweb
+</pre></div>
+</div>
+<p>You should get a cherrypy webserver running and serving on <a class="reference external" href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>.</p>
+</div>
+<div class="section" id="command-line-arguments">
+<h2>Command-line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<p>You may also add command-line arguments to an envbuilder command by overriding
+<a title="envbuilder.command.Command.get_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_arg_parser"><tt class="xref py py-meth docutils literal"><span class="pre">get_arg_parser()</span></tt></a>.  This method must return a
+parser that can parse the command-line.  Unless you really know what you&#8217;re doing,
+you should get the parser from <a title="envbuilder.command.Command.get_base_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_base_arg_parser"><tt class="xref py py-meth docutils literal"><span class="pre">get_base_arg_parser()</span></tt></a>.
+This will give you an instance of an <a class="reference external" href="http://argparse.googlecode.com/svn/tags/r11/doc/api-docs.html">argparse.ArgumentParser</a>
+that you may add arguments to.  For example, we can provide an argument for our
+hello command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">named_hello</span><span class="p">(</span><span class="n">Command</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prints hello to a specified user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;named_hello&#39;</span>
+    <span class="k">def</span> <span class="nf">get_arg_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_base_arg_parser</span><span class="p">()</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">&#39;--name&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;world&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s">&#39;Specify who we are greeting&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parser</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">notify</span><span class="p">(</span><span class="s">&#39;Hello, </span><span class="si">%s</span><span class="s">!&#39;</span> <span class="o">%</span> <span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now customize who we are greeting:</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb hello.named_hello
+&gt; Hello, world!
+
+envb hello.named_hello --name Jason
+&gt; Hello, Jason!
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-help">
+<h2>Adding help<a class="headerlink" href="#adding-help" title="Permalink to this headline">¶</a></h2>
+<p>Adding help is so easy, it&#8217;s done for you automatically!</p>
+<div class="highlight-bash"><div class="highlight"><pre>envb <span class="nb">help </span>hello.named_hello
+
+    Prints hello to a specified user.
+
+usage: envb named_hello <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-p PARCELS<span class="o">]</span> <span class="o">[</span>-v VERBOSE<span class="o">]</span> <span class="o">[</span>--version<span class="o">]</span> <span class="o">[</span>-N<span class="o">]</span> <span class="o">[</span>-U<span class="o">]</span>
+                        <span class="o">[</span>--name NAME<span class="o">]</span>
+
+optional arguments:
+  -h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+  -p PARCELS, --parcels PARCELS
+                        Select parcels to run this <span class="nb">command </span>on.
+  -v VERBOSE, --verbose VERBOSE
+                        Print verbose errors.
+  --version
+  -N, --no-deps         Don<span class="s1">&#39;t automatically install a command&#39;</span>s dependencies
+  -U, --upgrade         Update dependencies
+  --name NAME           Specify who we are greeting
+</pre></div>
+</div>
+<p>As you can see, named_hello&#8217;s docstring is printed out as the description of the
+command, and the help for the &#8211;name option is specified as well.</p>
+</div>
+<div class="section" id="module-envbuilder.command">
+<span id="reference"></span><h2>Reference<a class="headerlink" href="#module-envbuilder.command" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="envbuilder.command.Command">
+<em class="property">class </em><tt class="descclassname">envbuilder.command.</tt><tt class="descname">Command</tt><a class="headerlink" href="#envbuilder.command.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>An abstract base class for commands.</p>
+<dl class="method">
+<dt id="envbuilder.command.Command.get_arg_parser">
+<tt class="descname">get_arg_parser</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.get_arg_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be overridden in subclasses.  Returns an
+<tt class="xref py py-class docutils literal"><span class="pre">argparse.ArgumentParser</span></tt>.  By default, this
+returns the same as
+<a title="envbuilder.command.Command.get_base_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_base_arg_parser"><tt class="xref py py-meth docutils literal"><span class="pre">get_base_arg_parser()</span></tt></a>.</p>
+<p>In general, this method should get its parser from
+<a title="envbuilder.command.Command.get_base_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_base_arg_parser"><tt class="xref py py-meth docutils literal"><span class="pre">get_base_arg_parser()</span></tt></a>.
+Otherwise, some command-line options might not work.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.get_base_arg_parser">
+<tt class="descname">get_base_arg_parser</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.get_base_arg_parser" title="Permalink to this definition">¶</a></dt>
+<dd>This returns the argument parser with the base functionality.
+This should not be overridden in subclasses unless you know
+what you are doing.</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.handle_dependencies">
+<tt class="descname">handle_dependencies</tt><big>(</big><em>args</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.handle_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd>Install any python dependencies that are not findable by
+pkg_resources.require.</dd></dl>
+
+<dl class="classmethod">
+<dt id="envbuilder.command.Command.lookup_command">
+<em class="property">classmethod </em><tt class="descname">lookup_command</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.lookup_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>This looks up a command by looking in two places:</p>
+<blockquote>
+<ul class="simple">
+<li>The builtin command set</li>
+<li>sys.modules</li>
+</ul>
+</blockquote>
+<p>So for instance, &#8216;setup&#8217; would return the built in setup command,
+while &#8216;py.something&#8217; would produce an import statement equivalent
+to &#8216;from py import something&#8217;.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.main">
+<tt class="descname">main</tt><big>(</big><em>args</em>, <em>config</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.main" title="Permalink to this definition">¶</a></dt>
+<dd>This is the function to call to run a command.  This
+does handling of various tasks such as installing
+dependencies.</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.print_help">
+<tt class="descname">print_help</tt><big>(</big><big>)</big><a class="headerlink" href="#envbuilder.command.Command.print_help" title="Permalink to this definition">¶</a></dt>
+<dd>Print out the full help message.  By default, this calls
+the print_help method on the parser returned by
+<a title="envbuilder.command.Command.get_arg_parser" class="reference internal" href="#envbuilder.command.Command.get_arg_parser"><tt class="xref py py-meth docutils literal"><span class="pre">get_arg_parser()</span></tt></a>.</dd></dl>
+
+<dl class="method">
+<dt id="envbuilder.command.Command.run">
+<tt class="descname">run</tt><big>(</big><em>args</em>, <em>config</em><big>)</big><a class="headerlink" href="#envbuilder.command.Command.run" title="Permalink to this definition">¶</a></dt>
+<dd>Stub class to be overridden in subclasses.  This is
+where the actual logic of the command should go.</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        </div>
+        <div class="sidebar">
+          <h3>Table Of Contents</h3>
+          <ul class="current">
+<li class="toctree-l1"><a class="reference external" href="command-line.html">Command-line Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference external" href="">command</a><ul>
+<li class="toctree-l2"><a class="reference external" href="#hello-world">Hello world</a></li>
+<li class="toctree-l2"><a class="reference external" href="#using-a-shell-command">Using a shell command</a></li>
+<li class="toctree-l2"><a class="reference external" href="#running-a-webserver">Running a webserver</a></li>
+<li class="toctree-l2"><a class="reference external" href="#dependency-management">Dependency management</a></li>
+<li class="toctree-l2"><a class="reference external" href="#command-line-arguments">Command-line arguments</a></li>
+<li class="toctree-l2"><a class="reference external" href="#adding-help">Adding help</a></li>
+<li class="toctree-l2"><a class="reference external" href="#module-envbuilder.command">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="sh.html">sh - shell commands</a></li>
+<li class="toctree-l1"><a class="reference external" href="util.html">util</a></li>
+<li class="toctree-l1"><a class="reference external" href="config.html">Configuration</a></li>
+</ul>
+
+          <h3 style="margin-top: 1.5em;">Search</h3>
+          <form class="search" action="search.html" method="get">
+            <input type="text" name="q" size="18" />
+            <input type="submit" value="Go" />
+            <input type="hidden" name="check_keywords" value="yes" />
+            <input type="hidden" name="area" value="default" />
+          </form>
+          <p class="searchtip" style="font-size: 90%">
+            Enter search terms or a module, class or function name.
+          </p>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="footer">
+        <div class="left">
+          <a href="genindex.html" title="General Index"
+             >index</a> |
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |
+          <a href="sh.html" title="sh - shell commands"
+             >next</a> |
+          <a href="command-line.html" title="Command-line Reference"
+             >previous</a>
+            <br/>
+            <a href="sources/command.txt"
+               rel="nofollow">Show Source</a>
+        </div>
+
+        <div class="right">
+          
+    <div class="footer">
+        &copy; Copyright 2010, Jason Baker.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0pre.
+    </div>
+        </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+
+  </body>
+</html>

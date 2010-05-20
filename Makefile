@@ -35,7 +35,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
-	$(SPHINXBUILD) -a -b html $(ALLSPHINXOPTS) 0.3
+	$(SPHINXBUILD) -a -b html $(ALLSPHINXOPTS) 0.4
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
@@ -118,6 +118,6 @@ doctest:
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 create: html
-	rm -rf 0.3
-	mkdir 0.3
-	mv build/html/* 0.3
+	rm -rf 0.4
+	mkdir 0.4
+	mv build/html/* 0.4
