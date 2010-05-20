@@ -27,7 +27,7 @@ Envbuilder has a few goals:
    In fact, it will work with any VCS that has a command-line interface.  Use it
    with hg, git, bzr, SVN, or CVS (if you're a masochist).
 
-For more information, see the `envbuilder documentation <http://jasonbaker.github.com/envbuilder/0.3>`_.
+For more information, see the `envbuilder documentation <http://jasonbaker.github.com/envbuilder/0.4>`_.
 
 Installing
 ---------------
