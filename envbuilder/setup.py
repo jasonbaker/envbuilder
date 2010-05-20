@@ -17,14 +17,8 @@ class Setup(BuiltinCommand):
             upgrade_flag = '-U'
         else:
             upgrade_flag = ''
-        requirements = config['project']['requires']
-        if requirements:
-            warn('The requires attribute is deprecated and will be removed in a '
-                 'future release.')
-        pip_install = config['project']['pip_install'] 
-        for requirement in requirements:
-            sh('%s %s %s' % (pip_install, upgrade_flag, requirement))
-                
+        self.install_env_requires(config, upgrade_flag)
+               
         config.run_command('setup', required=False)
         
     def get_arg_parser(self):
@@ -34,3 +28,12 @@ class Setup(BuiltinCommand):
                             help="Don't (re)create the virtualenv")
         return parser
 
+    def install_env_requires(self, config, upgrade_flag):
+        requirements = config['project']['requires']
+        if requirements:
+            warn('The requires attribute is deprecated and will be removed in a '
+                 'future release.')
+        pip_install = config['project']['pip_install'] 
+        for requirement in requirements:
+            sh('%s %s %s' % (pip_install, upgrade_flag, requirement))
+ 
