@@ -30,6 +30,10 @@ def notify(cmd, level=0):
     prompt = _generate_prompt(level)
     print term.BLUE + prompt  + cmd + term.NORMAL
 
+def warn(msg, level=0):
+    prompt = _generate_prompt(level)
+    print term.RED + prompt + msg + term.NORMAL
+
 def _generate_prompt(level):
     if level == 0:
         return '> '
