@@ -32,7 +32,12 @@ For more information, see the `envbuilder documentation <http://jasonbaker.githu
 Installing
 ---------------
 
-You may install the current development version using easy_install::
+For the latest stable version, the easiest way to install envbuilder is
+through easy_intall::
+
+    easy_install envbuilder
+
+You may also install the current development version using easy_install::
 
     easy_install envbuilder==dev
 
@@ -48,6 +53,19 @@ by the `support mailing list <http://groups.google.com/group/envbuilder>`_.
 
 Release Notes
 ------------------
+
+0.3.0
+~~~~~~~~~~~~~~~~~~
+
+Compatibility issues:
+
+* Most commands have been moved to envb-site-commands.
+
+Other improvements:
+* Command handling has been revamped to allow for more plugability
+* Support for envb-site-commands
+* Dependency handling for commands
+* Lots of other miscellaneous fixes.
 
 0.2.2
 ~~~~~~~~~~~~~~~~~~
