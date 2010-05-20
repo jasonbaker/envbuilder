@@ -13,12 +13,9 @@ class Setup(BuiltinCommand):
         if not args.no_create:
             venv_opts = config['project']['virtualenv-args']
             sh('virtualenv ' + venv_opts)
-        if args.upgrade:
-            upgrade_flag = '-U'
-        else:
-            upgrade_flag = ''
-        self.install_env_requires(config, upgrade_flag)
-               
+        pip_cmd = self.get_pip_cmd(config, args)
+        self.install_env_requires(config, pip_cmd)
+        self.install_requirements_files(config, pip_cmd)
         config.run_command('setup', required=False)
         
     def get_arg_parser(self):
@@ -28,12 +25,26 @@ class Setup(BuiltinCommand):
                             help="Don't (re)create the virtualenv")
         return parser
 
-    def install_env_requires(self, config, upgrade_flag):
-        requirements = config['project']['requires']
-        if requirements:
+    def install_env_requires(self, config, pip_cmd):
+        required = config['project']['requires']
+        if required:
             warn('The requires attribute is deprecated and will be removed in a '
                  'future release.')
-        pip_install = config['project']['pip_install'] 
-        for requirement in requirements:
-            sh('%s %s %s' % (pip_install, upgrade_flag, requirement))
+        for requirement in required:
+            sh('%s %s' % (pip_cmd, requirement))
  
+    def get_pip_cmd(self, config, args):
+        if args.upgrade:
+            upgrade_flag = '-U'
+        else:
+            upgrade_flag = ''
+        return 'pip install -E . %s' % upgrade_flag
+ 
+
+    def install_requirements_files(self, config, pip_cmd):
+        requirements_files = config['project']['requirements']
+        for fname in requirements_files:
+            if os.path.exists(fname):
+                sh('%s -r %s' % (pip_cmd, fname))
+            else:
+                warn('Requirements file %s not found.  Skipping.' % fname)
