@@ -2,7 +2,7 @@ also = force_list(default=list())
 [project]
 parcels = force_list()
 requires = force_list(default=list())
-pip_install = string(default='pip install')
+pip_install = string(default='pip install -E .')
 command-path = force_list(default='./envb-site-commands')
 virtualenv-args = string(default='--no-site-packages --clear .')
 
