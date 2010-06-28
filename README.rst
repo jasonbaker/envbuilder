@@ -63,6 +63,7 @@ Compatibility issues:
 Other improvements:
 
 * Support for requirements files
+* Pip is being used in most places where easy_install was being used.
 
 0.3.0
 ~~~~~~~~~~~~~~~~~~
