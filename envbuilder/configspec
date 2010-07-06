@@ -4,6 +4,7 @@ parcels = force_list()
 requires = force_list(default=list())
 requirements = force_list(default=list('requirements.txt'))
 pip_install = string(default='pip install -E .')
+cache-eggs=boolean(default=True)
 command-path = force_list(default='./envb-site-commands')
 virtualenv-args = string(default='--no-site-packages --clear .')
 

@@ -37,6 +37,9 @@ class Setup(BuiltinCommand):
         flags = []
         if args.upgrade:
             flags.append('-U')
+
+        if config['project']['cache-eggs']:
+            flags.append('--download-cache=./downloads')
         return 'pip install -E . %s' % ' '.join(flags)
  
 
