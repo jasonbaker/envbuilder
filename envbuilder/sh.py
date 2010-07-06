@@ -15,6 +15,10 @@ def sh(cmd, cwd='.'):
     cwd = os.path.abspath(cwd)
     notify(cmd)
     notify('(From: %s)' % cwd, level=1)
+
+    # Flush output buffers, so the output is in order
+    sys.stdout.flush()
+    sys.stderr.flush()
     try:
         # So we can pass in an empty string to do nothing
         if cmd:
@@ -28,6 +32,7 @@ def sh(cmd, cwd='.'):
 
 def notify(cmd, level=0):
     prompt = _generate_prompt(level)
+
     print term.BLUE + prompt  + cmd + term.NORMAL
 
 def warn(msg, level=0):
