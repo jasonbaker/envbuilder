@@ -34,11 +34,10 @@ class Setup(BuiltinCommand):
             sh('%s %s' % (pip_cmd, requirement))
  
     def get_pip_cmd(self, config, args):
+        flags = []
         if args.upgrade:
-            upgrade_flag = '-U'
-        else:
-            upgrade_flag = ''
-        return 'pip install -E . %s' % upgrade_flag
+            flags.append('-U')
+        return 'pip install -E . %s' % ' '.join(flags)
  
 
     def install_requirements_files(self, config, pip_cmd):
